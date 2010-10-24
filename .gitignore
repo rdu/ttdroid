@@ -1,2 +1,3 @@
 app/target/
-lib/target/
+lib-api/target/
+lib-impl/target/

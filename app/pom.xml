@@ -5,10 +5,29 @@
     <groupId>de.guxx.ttdroid</groupId>
     <artifactId>app</artifactId>
     <packaging>apk</packaging>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>ttdroid</name>
 
+    <parent>
+        <groupId>de.guxx.ttdroid</groupId>
+        <artifactId>main</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <dependencies>
+
+        <dependency>
+            <groupId>de.guxx.ttdroid</groupId>
+            <artifactId>lib-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>                                                                                
+            <groupId>de.guxx.ttdroid</groupId>                                                      
+            <artifactId>lib-impl</artifactId>                                                       
+            <version>1.0-SNAPSHOT</version>                                                         
+        </dependency> 
+
         <dependency>
             <groupId>com.google.android</groupId>
             <artifactId>android</artifactId>
@@ -22,6 +41,8 @@
             <version>4.8.2</version>
             <scope>test</scope>
         </dependency>
+
+
     </dependencies>
 
     <build>
@@ -53,6 +74,18 @@
             </plugin>
         </plugins>
     </build>
-
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <configuration>
+                    <configLocation>config/sun_checks.xml</configLocation>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
+
+
 
