@@ -16,15 +16,19 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib;
 
-import de.guxx.ttdroid.lib.entity.User;
+package de.guxx.ttdroid.lib.entity;
 
 /**
  *
  * @author Ronny Dudeck
  */
-public interface Settings
+public interface Location
 {
-    public User getCurrentUser();
+    public Double getLatitude();
+    public Double getLongitude();
+    public void setLatitude(Double lat);
+    public void setLongitude(Double lon);
+    public String getName();
+    public void setName(String name);
 }

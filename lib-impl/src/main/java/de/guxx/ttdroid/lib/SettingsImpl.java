@@ -16,8 +16,9 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib;
+
+import de.guxx.ttdroid.lib.entity.User;
 
 /**
  *
@@ -25,4 +26,10 @@ package de.guxx.ttdroid.lib;
  */
 public class SettingsImpl implements Settings
 {
+
+    @Override
+    public User getCurrentUser()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

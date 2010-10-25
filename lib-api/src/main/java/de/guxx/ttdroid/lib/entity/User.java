@@ -16,15 +16,32 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib;
 
-import de.guxx.ttdroid.lib.entity.User;
+package de.guxx.ttdroid.lib.entity;
+
+import java.util.Date;
 
 /**
  *
  * @author Ronny Dudeck
  */
-public interface Settings
+public interface User
 {
-    public User getCurrentUser();
+    public enum Gender
+    {
+        m,
+        f
+    }
+    public String getSession();
+    public String getNick();
+    public String getEMail();
+    public String getForeName();
+    public Gender getGender();
+    public Integer getMaximumHeartRate();
+    public Float getHeight();
+    public String getIntroduction();
+    public Location getLocation();
+    public Display getDisplay();
+    public Zones getZones();
+    public Date getLastLogin();
 }

@@ -16,15 +16,13 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib;
 
-import de.guxx.ttdroid.lib.entity.User;
+package de.guxx.ttdroid.lib.entity;
 
 /**
  *
  * @author Ronny Dudeck
  */
-public interface Settings
+public interface Display
 {
-    public User getCurrentUser();
 }
