@@ -76,8 +76,36 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.5.0</version>
+                <configuration>
+                    <header>src/etc/header.txt</header>
+                    <properties>
+                        <year>2010-2010</year>
+                        <owner>Ronny Dudeck</owner>
+                        <email>ich@ronny-dudeck.de</email>
+                    </properties>
+                    <excludes>
+                        <exclude>AndroidManifest.xml</exclude>
+                        <exclude>res/*</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
+
     <reporting>
         <plugins>
             <plugin>
@@ -92,13 +120,11 @@
 
     <licenses>
         <license>
-            <name>Apache 2</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <name>GNU General Public License version 3</name>
+            <url>http://www.gnu.org/licenses/gpl.txt</url>
             <distribution>repo</distribution>
+            <comments />
         </license>
     </licenses>
 
 </project>
-
-
-
