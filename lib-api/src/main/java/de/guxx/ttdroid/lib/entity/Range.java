@@ -16,14 +16,17 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
+
 package de.guxx.ttdroid.lib.entity;
 
 /**
  *
  * @author Ronny Dudeck
  */
-public interface Zones
+public interface Range
 {
-    public Range getPower();
-    public Range getHeartRate();
+    public Integer getGa1();
+    public Integer getGa2();
+    public Integer getEb();
+    public Integer getSb();
 }

@@ -16,13 +16,29 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib.entity;
 
 /**
  *
  * @author Ronny Dudeck
  */
-public class Privacy
+public interface Privacy
 {
+
+    public enum Publicly
+    {
+
+        PRIVATE(0),
+        PUBLIC(1);
+        private Integer ordinal;
+
+        private Publicly(Integer ordinal)
+        {
+            this.ordinal = ordinal;
+        }
+    }
+
+    public Publicly getPublic();
+    public Publicly getLocation();
+    public Publicly getComment();
 }
