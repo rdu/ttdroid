@@ -24,4 +24,26 @@ package de.guxx.ttdroid.lib.entity;
  */
 public interface Display
 {
+    public Boolean isBloodPressure();
+    public Boolean isBloodSugar();
+    public Boolean isDistance();
+    public Boolean isHeartrate();
+    public Boolean isAscent();
+    public Boolean isCalories();
+    public Boolean isAdipose();
+    public Boolean isBodyTemp();
+    public Boolean isPower();
+    public Boolean isMaterial();
+    public Boolean isMuscleMass();
+    public Boolean isRestHr();
+    public Boolean isSleep();
+    public Boolean isSport();
+    public Boolean isRoute();
+    public Boolean isWaist();
+    public Boolean isBorg();
+    public Boolean isCadence();
+    public Boolean isVo2Max();
+    public Boolean isBodyWater();
+    public Boolean isWeather();
 }
+ 

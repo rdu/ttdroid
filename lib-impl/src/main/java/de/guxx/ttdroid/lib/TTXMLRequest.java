@@ -18,18 +18,10 @@
  */
 package de.guxx.ttdroid.lib;
 
-import de.guxx.ttdroid.lib.entity.User;
-
 /**
  *
  * @author Ronny Dudeck
  */
-public class SettingsImpl extends TTXMLRequest implements Settings
+public abstract class TTXMLRequest
 {
-
-    @Override
-    public User getCurrentUser()
-    {
-	throw new UnsupportedOperationException("Not supported yet.");
-    }
 }

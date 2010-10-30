@@ -1,16 +1,44 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>de.guxx.ttdroid</groupId>
-  <version>1.0-SNAPSHOT</version>
-  <artifactId>main</artifactId>
-  <packaging>pom</packaging>
-  <name>main</name>
-  <modules>
-    <module>app</module>
-    <module>lib-impl</module>
-    <module>lib-api</module>
-  </modules>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.guxx.ttdroid</groupId>
+    <version>1.0-SNAPSHOT</version>
+    <artifactId>main</artifactId>
+    <packaging>pom</packaging>
+    <name>main</name>
+    <modules>
+	<module>app</module>
+	<module>lib-impl</module>
+	<module>lib-api</module>
+    </modules>
+    <build>
+	<plugins>
+	    <plugin>
+		<groupId>com.mycila.maven-license-plugin</groupId>
+		<artifactId>maven-license-plugin</artifactId>
+		<version>1.5.0</version>
+		<configuration>
+		    <header>lib-api/src/etc/header.txt</header>
+		    <properties>
+			<year>2010-2010</year>
+			<owner>Ronny Dudeck</owner>
+			<email>ich@ronny-dudeck.de</email>
+		    </properties>
+		    <excludes>
+		    </excludes>
+		</configuration>
+		<executions>
+		    <execution>
+			<phase>test</phase>
+			<goals>
+			    <goal>check</goal>
+			</goals>
+		    </execution>
+		</executions>
+	    </plugin>
+	</plugins>
+    </build>
 </project>
