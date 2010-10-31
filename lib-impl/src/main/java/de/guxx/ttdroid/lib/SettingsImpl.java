@@ -24,7 +24,7 @@ import de.guxx.ttdroid.lib.entity.User;
  *
  * @author Ronny Dudeck
  */
-public class SettingsImpl extends TTXMLRequest implements Settings
+public class SettingsImpl implements Settings
 {
 
     @Override
