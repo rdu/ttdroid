@@ -16,10 +16,14 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.util;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.w3c.dom.Document;
 
 /**
@@ -28,8 +32,16 @@ import org.w3c.dom.Document;
  */
 public class TTXml
 {
+    /*
+     * constants
+     */
 
+    private final String baseUrl = "http://trainingstagebuch.org/";
+    /*
+     * private member variables
+     */
     private String sessionId;
+    private URLConnection connection;
 
     private TTXml()
     {
@@ -51,6 +63,7 @@ public class TTXml
 
     private static class TTXmlHolder
     {
+
 	private static final TTXml INSTANCE = new TTXml();
     }
 
@@ -75,6 +88,30 @@ public class TTXml
      */
     public Document getDomDocument(Map<String, Object> parameter)
     {
+	URL url = buildUrl(parameter);
+	return null;
+    }
+
+    private URL buildUrl(Map<String, Object> parameter)
+    {
+	try
+	{
+	    if (parameter == null) return new URL(baseUrl);
+	    if (parameter.isEmpty()) return new URL(baseUrl);
+	    StringBuilder url = new StringBuilder(baseUrl);
+	    url.append("?");
+	    for (Map.Entry entry : parameter.entrySet())
+	    {
+		url.append(entry.getKey());
+		url.append('=');
+		url.append(entry.getValue().toString());
+	    }
+	    return new URL(url.toString());
+	}
+	catch (MalformedURLException ex)
+	{
+	    Logger.getLogger(TTXml.class.getName()).log(Level.INFO, null, ex);
+	}
 	return null;
     }
 }

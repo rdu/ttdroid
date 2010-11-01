@@ -18,6 +18,8 @@
  */
 package de.guxx.ttdroid.util;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -83,5 +85,9 @@ public class TTXmlTest
     @Test
     public void testGetDomDocument()
     {
+	TTXml result = TTXml.getInstance("1234");
+	Map<String, Object>param = new HashMap<String, Object>();
+	param.put("test", "test2");
+	result.getDomDocument(param);
     }
 }
