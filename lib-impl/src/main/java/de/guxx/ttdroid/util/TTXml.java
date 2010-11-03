@@ -83,23 +83,33 @@ public class TTXml
      * submits specified parameter values
      * and returns the parsed document.
      *
+     * @param command 
      * @param parameter
      * @return
      */
-    public Document getDomDocument(Map<String, Object> parameter)
+    public Document getDomDocument(String command, Map<String, Object> parameter)
     {
-	URL url = buildUrl(parameter);
+	URL url = buildUrl(command, parameter);
 	return null;
     }
 
-    private URL buildUrl(Map<String, Object> parameter)
+    /**
+     * creates the query string for the request
+     * 
+     * @param command
+     * @param parameter
+     * @return
+     */
+    public URL buildUrl(String command, Map<String, Object> parameter)
     {
 	try
 	{
 	    if (parameter == null) return new URL(baseUrl);
 	    if (parameter.isEmpty()) return new URL(baseUrl);
+	    if (command.isEmpty()) return new URL(baseUrl);
 	    StringBuilder url = new StringBuilder(baseUrl);
-	    url.append("?");
+	    url.append(command);
+	    url.append(".xml?");
 	    for (Map.Entry entry : parameter.entrySet())
 	    {
 		url.append(entry.getKey());

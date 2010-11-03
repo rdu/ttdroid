@@ -18,6 +18,7 @@
  */
 package de.guxx.ttdroid.util;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
@@ -78,7 +79,7 @@ public class TTXmlTest
     public void testSetSessionId()
     {
     }
-
+   
     /**
      * Test of getDomDocument method, of class TTXml.
      */
@@ -88,6 +89,15 @@ public class TTXmlTest
 	TTXml result = TTXml.getInstance("1234");
 	Map<String, Object>param = new HashMap<String, Object>();
 	param.put("test", "test2");
-	result.getDomDocument(param);
+	result.getDomDocument("settings", param);
+    }
+
+    @Test
+    public void testBuildUrl()
+    {
+	TTXml result = TTXml.getInstance("1234");
+	Map<String, Object>param = new HashMap<String, Object>();
+	param.put("test", "test2");
+	assertEquals("http://trainingstagebuch.org/settings.xml?test=test2", result.buildUrl("settings", param).toString());
     }
 }
