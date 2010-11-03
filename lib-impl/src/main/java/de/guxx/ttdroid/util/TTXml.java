@@ -24,6 +24,8 @@ import java.net.URLConnection;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 
 /**
@@ -41,7 +43,6 @@ public class TTXml
      * private member variables
      */
     private String sessionId;
-    private URLConnection connection;
 
     private TTXml()
     {
@@ -89,8 +90,42 @@ public class TTXml
      */
     public Document getDomDocument(String command, Map<String, Object> parameter)
     {
-	URL url = buildUrl(command, parameter);
+	try
+	{
+	    URL url = buildUrl(command, parameter);
+	    URLConnection uc = url.openConnection();
+
+	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	    DocumentBuilder db = dbf.newDocumentBuilder();
+
+	    Document doc = db.parse(uc.getInputStream());
+	    return doc;
+	}
+	catch (Exception ex)
+	{
+	    Logger.getLogger(TTXml.class.getName()).log(Level.SEVERE, null, ex);
+	}
 	return null;
+    }
+
+    /**
+     * without parameter
+
+     * @param command
+     * @return
+     */
+    public Document getDomDocument(String command)
+    {
+	return getDomDocument(command, null);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getSessionId()
+    {
+	return sessionId;
     }
 
     /**
@@ -104,17 +139,26 @@ public class TTXml
     {
 	try
 	{
-	    if (parameter == null) return new URL(baseUrl);
-	    if (parameter.isEmpty()) return new URL(baseUrl);
 	    if (command.isEmpty()) return new URL(baseUrl);
 	    StringBuilder url = new StringBuilder(baseUrl);
 	    url.append(command);
-	    url.append(".xml?");
-	    for (Map.Entry entry : parameter.entrySet())
+	    url.append("?view=xml");
+	    url.append("&sso=");
+	    url.append(getSessionId());
+	    boolean first = true;
+	    if (parameter != null)
 	    {
-		url.append(entry.getKey());
-		url.append('=');
-		url.append(entry.getValue().toString());
+		for (Map.Entry entry : parameter.entrySet())
+		{
+		    if (first)
+		    {
+			url.append('&');
+			first = false;
+		    }
+		    url.append(entry.getKey());
+		    url.append('=');
+		    url.append(entry.getValue().toString());
+		}
 	    }
 	    return new URL(url.toString());
 	}

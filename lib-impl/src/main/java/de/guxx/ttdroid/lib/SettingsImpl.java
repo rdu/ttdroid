@@ -27,6 +27,10 @@ import de.guxx.ttdroid.lib.entity.User;
 public class SettingsImpl implements Settings
 {
 
+    /**
+     *
+     * @return
+     */
     @Override
     public User getCurrentUser()
     {

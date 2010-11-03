@@ -86,10 +86,9 @@ public class TTXmlTest
     @Test
     public void testGetDomDocument()
     {
-	TTXml result = TTXml.getInstance("1234");
-	Map<String, Object>param = new HashMap<String, Object>();
-	param.put("test", "test2");
-	result.getDomDocument("settings", param);
+	String session = System.getenv("TTSESSION");
+	TTXml result = TTXml.getInstance(session);
+	result.getDomDocument("settings");
     }
 
     @Test
@@ -98,6 +97,6 @@ public class TTXmlTest
 	TTXml result = TTXml.getInstance("1234");
 	Map<String, Object>param = new HashMap<String, Object>();
 	param.put("test", "test2");
-	assertEquals("http://trainingstagebuch.org/settings.xml?test=test2", result.buildUrl("settings", param).toString());
+	assertEquals("http://trainingstagebuch.org/settings?view=xml&sso=1234&test=test2", result.buildUrl("settings", param).toString());
     }
 }
