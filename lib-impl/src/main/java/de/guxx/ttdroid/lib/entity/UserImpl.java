@@ -16,7 +16,6 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib.entity;
 
 import java.util.Date;
@@ -30,91 +29,159 @@ import org.w3c.dom.Element;
 public class UserImpl extends GenericEntity implements User
 {
 
+    private Location location;
+
     private UserImpl()
     {
 	super(null, null);
     }
- 
+
+    /**
+     * 
+     * @param rootElement
+     * @param document
+     */
     public UserImpl(Element rootElement, Document document)
     {
 	super(rootElement, document);
     }
-    
+
+    /**
+     * 
+     * @return
+     */
     @Override
     public String getSession()
     {
 	return getString("session");
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public String getNick()
     {
 	return getString("nick");
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public String getEMail()
     {
 	return getString("email");
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public String getForeName()
     {
 	return getString("forename");
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public String getSurName()
     {
 	return getString("surname");
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public Gender getGender()
     {
 	throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public Integer getMaximumHeartRate()
     {
 	throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public Float getHeight()
     {
 	throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public String getIntroduction()
     {
 	throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public Location getLocation()
     {
-	throw new UnsupportedOperationException("Not supported yet.");
+	return location;
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public Display getDisplay()
     {
 	throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public Zones getZones()
     {
 	throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public Date getLastLogin()
     {
 	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /**
+     * 
+     * @param location
+     */
+    public void setLocation(Location location)
+    {
+	this.location = location;
     }
 }

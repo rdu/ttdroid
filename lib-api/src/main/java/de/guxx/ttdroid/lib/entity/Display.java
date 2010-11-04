@@ -24,26 +24,130 @@ package de.guxx.ttdroid.lib.entity;
  */
 public interface Display
 {
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isBloodPressure();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isBloodSugar();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isDistance();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isHeartrate();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isAscent();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isCalories();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isAdipose();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isBodyTemp();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isPower();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isMaterial();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isMuscleMass();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isRestHr();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isSleep();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isSport();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isRoute();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isWaist();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isBorg();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isCadence();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isVo2Max();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isBodyWater();
+
+    /**
+     * 
+     * @return
+     */
     public Boolean isWeather();
 }
- 

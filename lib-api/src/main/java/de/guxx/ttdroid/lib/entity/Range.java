@@ -16,7 +16,6 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib.entity;
 
 /**
@@ -25,8 +24,28 @@ package de.guxx.ttdroid.lib.entity;
  */
 public interface Range
 {
+
+    /**
+     * 
+     * @return
+     */
     public Integer getGa1();
+
+    /**
+     * 
+     * @return
+     */
     public Integer getGa2();
+
+    /**
+     * 
+     * @return
+     */
     public Integer getEb();
+
+    /**
+     * 
+     * @return
+     */
     public Integer getSb();
 }

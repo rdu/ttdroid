@@ -16,7 +16,6 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib.exception;
 
 /**
@@ -26,21 +25,37 @@ package de.guxx.ttdroid.lib.exception;
 public class TTException extends Throwable
 {
 
+    /**
+     * 
+     * @param cause
+     */
     public TTException(Throwable cause)
     {
 	super(cause);
     }
 
+    /**
+     * 
+     * @param message
+     * @param cause
+     */
     public TTException(String message, Throwable cause)
     {
 	super(message, cause);
     }
 
+    /**
+     * 
+     * @param message
+     */
     public TTException(String message)
     {
 	super(message);
     }
 
+    /**
+     * 
+     */
     public TTException()
     {
     }

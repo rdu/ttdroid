@@ -16,7 +16,6 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib;
 
 /**
@@ -26,6 +25,11 @@ package de.guxx.ttdroid.lib;
 public class Settings
 {
 
+    /**
+     * static method to get the current session
+     * TODO: correct implementation
+     * @return
+     */
     public static String getSession()
     {
 	return System.getenv("TTSESSION");

@@ -16,13 +16,14 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib;
 
 import de.guxx.ttdroid.lib.entity.User;
 import de.guxx.ttdroid.lib.entity.UserImpl;
 import de.guxx.ttdroid.util.TTXml;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 /**
  *
@@ -31,12 +32,31 @@ import org.w3c.dom.Document;
 public class UserFactory
 {
 
+    /**
+     * creates an Object that implements the User interface
+     * 
+     * TODO: need to implement some caching
+     * 
+     * @return
+     */
     public static User getCurrentUser()
     {
 	String session = Settings.getSession();
 	TTXml result = TTXml.getInstance(session);
 	Document dom = result.getDomDocument("settings");
-	User user = new UserImpl(dom.getDocumentElement(), dom);
+	UserImpl user = new UserImpl(dom.getDocumentElement(), dom);
+
+	// find node for location an injecting to current user
+	NodeList displayList = dom.getElementsByTagName("location");
+	if (displayList != null)
+	{
+	    if (displayList.getLength() > 0)
+	    {
+		Element location = (Element) displayList.item(0);
+		user.setLocation(LocationFactory.createLocationFromElement(location, dom));
+	    }
+	}
+
 	return user;
     }
 }

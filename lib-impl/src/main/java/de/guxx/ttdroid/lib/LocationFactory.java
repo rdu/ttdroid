@@ -16,52 +16,30 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib.entity;
+package de.guxx.ttdroid.lib;
+
+import de.guxx.ttdroid.lib.entity.Location;
+import de.guxx.ttdroid.lib.entity.LocationImpl;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  *
- * @author Ronny Dudeck
+ * @author rdu
  */
-public interface Privacy
+public class LocationFactory
 {
 
     /**
+     * creates an Object that implements the Location interface
      * 
+     * @param element
+     * @param dom
+     * @return
      */
-    public enum Publicly
+    public static Location createLocationFromElement(Element element, Document dom)
     {
-
-	/**
-	 * private
-	 */
-	PRIVATE(0),
-	/**
-	 * public
-	 */
-	PUBLIC(1);
-	private Integer ordinal;
-
-	private Publicly(Integer ordinal)
-	{
-	    this.ordinal = ordinal;
-	}
+	LocationImpl location = new LocationImpl(element, dom);
+	return location;
     }
-
-    /**
-     * 
-     * @return
-     */
-    public Publicly getPublic();
-
-    /**
-     * 
-     * @return
-     */
-    public Publicly getLocation();
-
-    /**
-     * 
-     * @return
-     */
-    public Publicly getComment();
 }

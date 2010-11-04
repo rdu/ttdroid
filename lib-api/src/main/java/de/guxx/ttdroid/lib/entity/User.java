@@ -16,7 +16,6 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib.entity;
 
 import java.util.Date;
@@ -27,22 +26,98 @@ import java.util.Date;
  */
 public interface User
 {
+
+    /**
+     * 
+     */
     public enum Gender
     {
-        m,
-        f
+
+	/**
+	 * male
+	 */
+	m,
+	/**
+	 * female
+	 */
+	f
     }
+
+    /**
+     * 
+     * @return
+     */
     public String getSession();
+
+    /**
+     * 
+     * @return
+     */
     public String getNick();
+
+    /**
+     * 
+     * @return
+     */
     public String getEMail();
+
+    /**
+     * 
+     * @return
+     */
     public String getForeName();
+
+    /**
+     * 
+     * @return
+     */
     public String getSurName();
+
+    /**
+     * 
+     * @return
+     */
     public Gender getGender();
+
+    /**
+     * 
+     * @return
+     */
     public Integer getMaximumHeartRate();
+
+    /**
+     * 
+     * @return
+     */
     public Float getHeight();
+
+    /**
+     * 
+     * @return
+     */
     public String getIntroduction();
+
+    /**
+     * 
+     * @return
+     */
     public Location getLocation();
+
+    /**
+     * 
+     * @return
+     */
     public Display getDisplay();
+
+    /**
+     * 
+     * @return
+     */
     public Zones getZones();
+
+    /**
+     * 
+     * @return
+     */
     public Date getLastLogin();
 }

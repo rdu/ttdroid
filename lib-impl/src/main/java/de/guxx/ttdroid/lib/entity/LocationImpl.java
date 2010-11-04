@@ -18,50 +18,60 @@
  */
 package de.guxx.ttdroid.lib.entity;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 /**
  *
- * @author Ronny Dudeck
+ * @author rdu
  */
-public interface Privacy
+public class LocationImpl extends GenericEntity implements Location
 {
 
     /**
+     * the only contructor
      * 
+     * @param rootElement
+     * @param document
      */
-    public enum Publicly
+    public LocationImpl(Element rootElement, Document document)
     {
-
-	/**
-	 * private
-	 */
-	PRIVATE(0),
-	/**
-	 * public
-	 */
-	PUBLIC(1);
-	private Integer ordinal;
-
-	private Publicly(Integer ordinal)
-	{
-	    this.ordinal = ordinal;
-	}
+	super(rootElement, document);
     }
 
     /**
+     * implementation
+     * @see Location
      * 
      * @return
      */
-    public Publicly getPublic();
+    @Override
+    public Double getLatitude()
+    {
+	return getDouble("lat");
+    }
 
     /**
-     * 
+     * implementation
+     * @see Location
+    
      * @return
      */
-    public Publicly getLocation();
+    @Override
+    public Double getLongitude()
+    {
+	return getDouble("lng");
+    }
 
     /**
-     * 
+     * implementation
+     * @see Location
+    
      * @return
      */
-    public Publicly getComment();
+    @Override
+    public String getName()
+    {
+	return getString("name");
+    }
 }

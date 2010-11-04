@@ -24,6 +24,16 @@ package de.guxx.ttdroid.lib.entity;
  */
 public interface Zones
 {
+
+    /**
+     * 
+     * @return
+     */
     public Range getPower();
+
+    /**
+     * 
+     * @return
+     */
     public Range getHeartRate();
 }

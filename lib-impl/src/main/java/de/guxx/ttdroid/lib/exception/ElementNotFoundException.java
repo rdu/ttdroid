@@ -16,7 +16,6 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib.exception;
 
 /**
@@ -26,20 +25,36 @@ package de.guxx.ttdroid.lib.exception;
 public class ElementNotFoundException extends TTException
 {
 
+    /**
+     * 
+     */
     public ElementNotFoundException()
     {
     }
 
+    /**
+     * 
+     * @param message
+     */
     public ElementNotFoundException(String message)
     {
 	super(message);
     }
 
+    /**
+     * 
+     * @param message
+     * @param cause
+     */
     public ElementNotFoundException(String message, Throwable cause)
     {
 	super(message, cause);
     }
 
+    /**
+     * 
+     * @param cause
+     */
     public ElementNotFoundException(Throwable cause)
     {
 	super(cause);

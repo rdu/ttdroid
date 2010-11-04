@@ -30,22 +30,41 @@ import org.w3c.dom.NodeList;
 public abstract class GenericEntity
 {
 
+    /**
+     * root element to work on
+     */
     protected Element rootElement;
+    /**
+     * document that contains the current element
+     */
     protected Document document;
 
     private GenericEntity()
     {
     }
 
+    /**
+     * the only public contructor
+     * 
+     * @param rootElement
+     * @param document
+     */
     public GenericEntity(Element rootElement, Document document)
     {
 	this.rootElement = rootElement;
 	this.document = document;
     }
 
+    /**
+     * helper method to fetch the first element by name
+     * 
+     * @param name
+     * @return
+     * @throws ElementNotFoundException
+     */
     protected final Element getFirstElement(String name) throws ElementNotFoundException
     {
-	NodeList nl = rootElement.getElementsByTagName("session");
+	NodeList nl = rootElement.getElementsByTagName(name);
 	if (nl != null)
 	{
 	    if (nl.getLength() > 0)
@@ -53,20 +72,49 @@ public abstract class GenericEntity
 		return (Element) nl.item(0);
 	    }
 	}
-	throw new ElementNotFoundException("element " + name + "not found");
+	throw new ElementNotFoundException("element " + name + " not found");
     }
 
+    /**
+     * helper method to get the string content of an element by name
+     * 
+     * @param name
+     * @return
+     */
     public String getString(String name)
     {
 	try
 	{
-	    Element session = getFirstElement(name);
-	    return session.getTextContent();
+	    Element e = getFirstElement(name);
+	    return e.getTextContent();
 	}
 	catch (ElementNotFoundException ex)
 	{
 	    return "";
 	}
+    }
 
+    /**
+     * helper method to get (and parse) the double content of an element by name
+     * @param name
+     * @return
+     */
+    public Double getDouble(String name)
+    {
+	try
+	{
+	    try
+	    {
+		Element e = getFirstElement(name);
+		return Double.parseDouble(e.getTextContent());
+	    }
+	    catch (Exception e)
+	    {
+	    }
+	}
+	catch (ElementNotFoundException ex)
+	{
+	}
+	return 0d;
     }
 }

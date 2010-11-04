@@ -16,7 +16,6 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib.entity;
 
 /**
@@ -25,10 +24,22 @@ package de.guxx.ttdroid.lib.entity;
  */
 public interface Location
 {
+
+    /**
+     * 
+     * @return
+     */
     public Double getLatitude();
+
+    /**
+     * 
+     * @return
+     */
     public Double getLongitude();
-    public void setLatitude(Double lat);
-    public void setLongitude(Double lon);
+
+    /**
+     * 
+     * @return
+     */
     public String getName();
-    public void setName(String name);
 }

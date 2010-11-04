@@ -16,9 +16,9 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
+
 package de.guxx.ttdroid.lib.entity;
 
-import de.guxx.ttdroid.lib.Settings;
 import de.guxx.ttdroid.lib.UserFactory;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -31,10 +31,10 @@ import static org.junit.Assert.*;
  *
  * @author rdu
  */
-public class UserImplTest
+public class LocationImplTest
 {
 
-    public UserImplTest()
+    public LocationImplTest()
     {
     }
 
@@ -59,33 +59,16 @@ public class UserImplTest
     }
 
     @Test
-    public void testGetter()
+    public void testMethods()
     {
-	try
-	{
-	    User user = UserFactory.getCurrentUser();
-	    testString(user.getSession(), Settings.getSession());
-	    testString(user.getNick());
-	    assertNotSame(user.getNick(), Settings.getSession());
-	    testString(user.getEMail());
-	    testString(user.getForeName());
-	}
-	catch (Exception e)
-	{
-	    fail(e.getLocalizedMessage());
-	}
-    }
-
-    private void testString(String string, String assertation)
-    {
-	assertTrue(string != null);
-	assertTrue(!string.isEmpty());
-	assertEquals(assertation, string);
-    }
-
-    private void testString(String string)
-    {
-	assertTrue(string != null);
-	assertTrue(!string.isEmpty());
+	User user = UserFactory.getCurrentUser();
+	Location l = user.getLocation();
+	assertNotNull(l);
+	assertNotNull(l.getName());
+	assertNotNull(l.getLatitude());
+	assertNotNull(l.getLongitude());
+	assertTrue(l.getLatitude() > 0);
+	assertTrue(l.getLongitude() > 0);
+	assertTrue(!l.getName().isEmpty());
     }
 }
