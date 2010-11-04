@@ -17,32 +17,49 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.guxx.ttdroid.lib.entity;
+package de.guxx.ttdroid.lib;
 
-import java.util.Date;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
- * @author Ronny Dudeck
+ * @author rdu
  */
-public interface User
+public class UserFactoryTest
 {
-    public enum Gender
+
+    public UserFactoryTest()
     {
-        m,
-        f
     }
-    public String getSession();
-    public String getNick();
-    public String getEMail();
-    public String getForeName();
-    public String getSurName();
-    public Gender getGender();
-    public Integer getMaximumHeartRate();
-    public Float getHeight();
-    public String getIntroduction();
-    public Location getLocation();
-    public Display getDisplay();
-    public Zones getZones();
-    public Date getLastLogin();
+
+    @BeforeClass
+    public static void setUpClass() throws Exception
+    {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception
+    {
+    }
+
+    @Before
+    public void setUp()
+    {
+    }
+
+    @After
+    public void tearDown()
+    {
+    }
+
+    @Test
+    public void testGetCurrentUser()
+    {
+	assertNotNull(UserFactory.getCurrentUser());
+    }
 }

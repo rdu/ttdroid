@@ -16,15 +16,27 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
+
 package de.guxx.ttdroid.lib;
 
 import de.guxx.ttdroid.lib.entity.User;
+import de.guxx.ttdroid.lib.entity.UserImpl;
+import de.guxx.ttdroid.util.TTXml;
+import org.w3c.dom.Document;
 
 /**
  *
- * @author Ronny Dudeck
+ * @author rdu
  */
-public interface Settings
+public class UserFactory
 {
-    public User getCurrentUser();
+
+    public static User getCurrentUser()
+    {
+	String session = Settings.getSession();
+	TTXml result = TTXml.getInstance(session);
+	Document dom = result.getDomDocument("settings");
+	User user = new UserImpl(dom.getDocumentElement(), dom);
+	return user;
+    }
 }

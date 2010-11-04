@@ -17,32 +17,31 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.guxx.ttdroid.lib.entity;
-
-import java.util.Date;
+package de.guxx.ttdroid.lib.exception;
 
 /**
  *
- * @author Ronny Dudeck
+ * @author rdu
  */
-public interface User
+public class ElementNotFoundException extends TTException
 {
-    public enum Gender
+
+    public ElementNotFoundException()
     {
-        m,
-        f
     }
-    public String getSession();
-    public String getNick();
-    public String getEMail();
-    public String getForeName();
-    public String getSurName();
-    public Gender getGender();
-    public Integer getMaximumHeartRate();
-    public Float getHeight();
-    public String getIntroduction();
-    public Location getLocation();
-    public Display getDisplay();
-    public Zones getZones();
-    public Date getLastLogin();
+
+    public ElementNotFoundException(String message)
+    {
+	super(message);
+    }
+
+    public ElementNotFoundException(String message, Throwable cause)
+    {
+	super(message, cause);
+    }
+
+    public ElementNotFoundException(Throwable cause)
+    {
+	super(cause);
+    }
 }

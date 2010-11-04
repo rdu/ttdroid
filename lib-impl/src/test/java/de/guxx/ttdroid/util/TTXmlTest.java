@@ -18,7 +18,7 @@
  */
 package de.guxx.ttdroid.util;
 
-import java.net.URL;
+import de.guxx.ttdroid.lib.Settings;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
@@ -26,6 +26,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import static org.junit.Assert.*;
 
 /**
@@ -86,9 +88,13 @@ public class TTXmlTest
     @Test
     public void testGetDomDocument()
     {
-	String session = System.getenv("TTSESSION");
+	String session = Settings.getSession();
 	TTXml result = TTXml.getInstance(session);
-	result.getDomDocument("settings");
+	Document dom = result.getDomDocument("settings");
+	assertNotNull(dom);
+	assertEquals(1, dom.getElementsByTagName("session").getLength());
+	Element e = (Element)dom.getElementsByTagName("session").item(0);
+	assertEquals(session, e.getTextContent());
     }
 
     @Test

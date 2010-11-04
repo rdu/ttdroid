@@ -17,32 +17,17 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.guxx.ttdroid.lib.entity;
-
-import java.util.Date;
+package de.guxx.ttdroid.lib;
 
 /**
  *
- * @author Ronny Dudeck
+ * @author rdu
  */
-public interface User
+public class Settings
 {
-    public enum Gender
+
+    public static String getSession()
     {
-        m,
-        f
+	return System.getenv("TTSESSION");
     }
-    public String getSession();
-    public String getNick();
-    public String getEMail();
-    public String getForeName();
-    public String getSurName();
-    public Gender getGender();
-    public Integer getMaximumHeartRate();
-    public Float getHeight();
-    public String getIntroduction();
-    public Location getLocation();
-    public Display getDisplay();
-    public Zones getZones();
-    public Date getLastLogin();
 }

@@ -16,24 +16,32 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib;
 
-import de.guxx.ttdroid.lib.entity.User;
+package de.guxx.ttdroid.lib.exception;
 
 /**
  *
- * @author Ronny Dudeck
+ * @author rdu
  */
-public class SettingsImpl implements Settings
+public class TTException extends Throwable
 {
 
-    /**
-     *
-     * @return
-     */
-    @Override
-    public User getCurrentUser()
+    public TTException(Throwable cause)
     {
-	throw new UnsupportedOperationException("Not supported yet.");
+	super(cause);
+    }
+
+    public TTException(String message, Throwable cause)
+    {
+	super(message, cause);
+    }
+
+    public TTException(String message)
+    {
+	super(message);
+    }
+
+    public TTException()
+    {
     }
 }
