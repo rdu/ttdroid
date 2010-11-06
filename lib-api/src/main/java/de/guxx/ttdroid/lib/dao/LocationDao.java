@@ -17,49 +17,14 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.guxx.ttdroid.lib;
+package de.guxx.ttdroid.lib.dao;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import de.guxx.ttdroid.lib.entity.Location;
 
 /**
  *
  * @author rdu
  */
-public class UserFactoryTest
+public interface LocationDao extends Dao<Location>
 {
-
-    public UserFactoryTest()
-    {
-    }
-
-    @BeforeClass
-    public static void setUpClass() throws Exception
-    {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception
-    {
-    }
-
-    @Before
-    public void setUp()
-    {
-    }
-
-    @After
-    public void tearDown()
-    {
-    }
-
-    @Test
-    public void testGetCurrentUser()
-    {
-	assertNotNull(UserFactory.getCurrentUser());
-    }
 }

@@ -16,10 +16,9 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib;
+package de.guxx.ttdroid.lib.dao;
 
 import de.guxx.ttdroid.lib.entity.User;
-import de.guxx.ttdroid.lib.entity.UserImpl;
 import de.guxx.ttdroid.util.TTXml;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -29,17 +28,9 @@ import org.w3c.dom.NodeList;
  *
  * @author rdu
  */
-public class UserFactory
+public class UserDaoImpl implements UserDao
 {
-
-    /**
-     * creates an Object that implements the User interface
-     * 
-     * TODO: need to implement some caching
-     * 
-     * @return
-     */
-    public static User getCurrentUser()
+/*    public static User getCurrentUser()
     {
 	String session = Settings.getSession();
 	TTXml result = TTXml.getInstance(session);
@@ -59,4 +50,5 @@ public class UserFactory
 
 	return user;
     }
+ */
 }

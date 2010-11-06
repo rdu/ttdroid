@@ -18,50 +18,89 @@
  */
 package de.guxx.ttdroid.lib.entity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ronny Dudeck
  */
-public interface Privacy
+public class Privacy implements Serializable
 {
-
     /**
      * 
      */
     public enum Publicly
     {
+        /**
+         * private
+         */
+        PRIVATE(0),
+        /**
+         * public
+         */
+        PUBLIC(1);
+        private Integer ordinal;
 
-	/**
-	 * private
-	 */
-	PRIVATE(0),
-	/**
-	 * public
-	 */
-	PUBLIC(1);
-	private Integer ordinal;
+        private Publicly(Integer ordinal)
+        {
+            this.ordinal = ordinal;
+        }
+    }
+    private Publicly _public;
+    private Publicly location;
+    private Publicly comment;
 
-	private Publicly(Integer ordinal)
-	{
-	    this.ordinal = ordinal;
-	}
+    /**
+     * 
+     * @return
+     */
+    public Publicly getPublic()
+    {
+        return _public;
+    }
+
+    /**
+     * 
+     * @param _public
+     */
+    public void setPublic(Publicly _public)
+    {
+        this._public = _public;
     }
 
     /**
      * 
      * @return
      */
-    public Publicly getPublic();
+    public Publicly getComment()
+    {
+        return comment;
+    }
+
+    /**
+     * 
+     * @param comment
+     */
+    public void setComment(Publicly comment)
+    {
+        this.comment = comment;
+    }
 
     /**
      * 
      * @return
      */
-    public Publicly getLocation();
+    public Publicly getLocation()
+    {
+        return location;
+    }
 
     /**
      * 
-     * @return
+     * @param location
      */
-    public Publicly getComment();
+    public void setLocation(Publicly location)
+    {
+        this.location = location;
+    }
 }

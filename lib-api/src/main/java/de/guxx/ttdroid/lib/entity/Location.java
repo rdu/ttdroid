@@ -18,28 +18,69 @@
  */
 package de.guxx.ttdroid.lib.entity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ronny Dudeck
  */
-public interface Location
+public class Location implements Serializable
 {
+    private Double latitude;
+    private Double longitude;
+    private String name;
 
     /**
      * 
      * @return
      */
-    public Double getLatitude();
+    public Double getLatitude()
+    {
+        return latitude;
+    }
+
+    /**
+     * 
+     * @param latitude
+     */
+    public void setLatitude(Double latitude)
+    {
+        this.latitude = latitude;
+    }
 
     /**
      * 
      * @return
      */
-    public Double getLongitude();
+    public Double getLongitude()
+    {
+        return longitude;
+    }
+
+    /**
+     * 
+     * @param longitude
+     */
+    public void setLongitude(Double longitude)
+    {
+        this.longitude = longitude;
+    }
 
     /**
      * 
      * @return
      */
-    public String getName();
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * 
+     * @param name
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 }

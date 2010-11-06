@@ -16,30 +16,15 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib;
 
-import de.guxx.ttdroid.lib.entity.Location;
-import de.guxx.ttdroid.lib.entity.LocationImpl;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+package de.guxx.ttdroid.lib.dao;
+
+import de.guxx.ttdroid.lib.entity.User;
 
 /**
  *
  * @author rdu
  */
-public class LocationFactory
+public interface UserDao extends Dao<User>
 {
-
-    /**
-     * creates an Object that implements the Location interface
-     * 
-     * @param element
-     * @param dom
-     * @return
-     */
-    public static Location createLocationFromElement(Element element, Document dom)
-    {
-	LocationImpl location = new LocationImpl(element, dom);
-	return location;
-    }
 }

@@ -16,52 +16,13 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib.entity;
 
-import java.io.Serializable;
+package de.guxx.ttdroid.lib.dao;
 
 /**
  *
- * @author Ronny Dudeck
+ * @author rdu
  */
-public class Zones implements Serializable
+public interface Dao<T>
 {
-    private Range power;
-    private Range heartRate;
-
-    /**
-     * 
-     * @return
-     */
-    public Range getHeartRate()
-    {
-        return heartRate;
-    }
-
-    /**
-     * 
-     * @param heartRate
-     */
-    public void setHeartRate(Range heartRate)
-    {
-        this.heartRate = heartRate;
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public Range getPower()
-    {
-        return power;
-    }
-
-    /**
-     * 
-     * @param power
-     */
-    public void setPower(Range power)
-    {
-        this.power = power;
-    }
 }

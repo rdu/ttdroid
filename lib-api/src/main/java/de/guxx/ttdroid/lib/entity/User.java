@@ -16,108 +16,277 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
+
 package de.guxx.ttdroid.lib.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author Ronny Dudeck
  */
-public interface User
+public class User implements Serializable
 {
-
     /**
      * 
      */
     public enum Gender
     {
+        /**
+         * male
+         */
+        m,
+        /**
+         * female
+         */
+        f
+    }
+    private String session;
+    private String nick;
+    private String email;
+    private String foreName;
+    private String surName;
+    private Gender gender;
+    private Integer maximumHeartRate;
+    private Float height;
+    private String introduction;
+    private Location location;
+    private Display display;
+    private Zones zones;
+    private Date lastLogin;
 
-	/**
-	 * male
-	 */
-	m,
-	/**
-	 * female
-	 */
-	f
+    /**
+     * 
+     * @return
+     */
+    public Display getDisplay()
+    {
+        return display;
+    }
+
+    /**
+     * 
+     * @param display
+     */
+    public void setDisplay(Display display)
+    {
+        this.display = display;
     }
 
     /**
      * 
      * @return
      */
-    public String getSession();
+    public String getEmail()
+    {
+        return email;
+    }
+
+    /**
+     * 
+     * @param email
+     */
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
 
     /**
      * 
      * @return
      */
-    public String getNick();
+    public String getForeName()
+    {
+        return foreName;
+    }
+
+    /**
+     * 
+     * @param foreName
+     */
+    public void setForeName(String foreName)
+    {
+        this.foreName = foreName;
+    }
 
     /**
      * 
      * @return
      */
-    public String getEMail();
+    public Gender getGender()
+    {
+        return gender;
+    }
+
+    /**
+     * 
+     * @param gender
+     */
+    public void setGender(Gender gender)
+    {
+        this.gender = gender;
+    }
 
     /**
      * 
      * @return
      */
-    public String getForeName();
+    public Float getHeight()
+    {
+        return height;
+    }
+
+    /**
+     * 
+     * @param height
+     */
+    public void setHeight(Float height)
+    {
+        this.height = height;
+    }
 
     /**
      * 
      * @return
      */
-    public String getSurName();
+    public String getIntroduction()
+    {
+        return introduction;
+    }
+
+    /**
+     * 
+     * @param introduction
+     */
+    public void setIntroduction(String introduction)
+    {
+        this.introduction = introduction;
+    }
 
     /**
      * 
      * @return
      */
-    public Gender getGender();
+    public Date getLastLogin()
+    {
+        return lastLogin;
+    }
+
+    /**
+     * 
+     * @param lastLogin
+     */
+    public void setLastLogin(Date lastLogin)
+    {
+        this.lastLogin = lastLogin;
+    }
 
     /**
      * 
      * @return
      */
-    public Integer getMaximumHeartRate();
+    public Location getLocation()
+    {
+        return location;
+    }
+
+    /**
+     * 
+     * @param location
+     */
+    public void setLocation(Location location)
+    {
+        this.location = location;
+    }
 
     /**
      * 
      * @return
      */
-    public Float getHeight();
+    public Integer getMaximumHeartRate()
+    {
+        return maximumHeartRate;
+    }
+
+    /**
+     * 
+     * @param maximumHeartRate
+     */
+    public void setMaximumHeartRate(Integer maximumHeartRate)
+    {
+        this.maximumHeartRate = maximumHeartRate;
+    }
 
     /**
      * 
      * @return
      */
-    public String getIntroduction();
+    public String getNick()
+    {
+        return nick;
+    }
+
+    /**
+     * 
+     * @param nick
+     */
+    public void setNick(String nick)
+    {
+        this.nick = nick;
+    }
 
     /**
      * 
      * @return
      */
-    public Location getLocation();
+    public String getSession()
+    {
+        return session;
+    }
+
+    /**
+     * 
+     * @param session
+     */
+    public void setSession(String session)
+    {
+        this.session = session;
+    }
 
     /**
      * 
      * @return
      */
-    public Display getDisplay();
+    public String getSurName()
+    {
+        return surName;
+    }
+
+    /**
+     * 
+     * @param surName
+     */
+    public void setSurName(String surName)
+    {
+        this.surName = surName;
+    }
 
     /**
      * 
      * @return
      */
-    public Zones getZones();
+    public Zones getZones()
+    {
+        return zones;
+    }
 
     /**
      * 
-     * @return
+     * @param zones
      */
-    public Date getLastLogin();
+    public void setZones(Zones zones)
+    {
+        this.zones = zones;
+    }
 }

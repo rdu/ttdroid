@@ -16,52 +16,14 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib.entity;
+package de.guxx.ttdroid.lib;
 
-import java.io.Serializable;
+import de.guxx.ttdroid.lib.dao.LocationDao;
 
 /**
  *
- * @author Ronny Dudeck
+ * @author rdu
  */
-public class Zones implements Serializable
+public class LocationDaoImpl implements LocationDao
 {
-    private Range power;
-    private Range heartRate;
-
-    /**
-     * 
-     * @return
-     */
-    public Range getHeartRate()
-    {
-        return heartRate;
-    }
-
-    /**
-     * 
-     * @param heartRate
-     */
-    public void setHeartRate(Range heartRate)
-    {
-        this.heartRate = heartRate;
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public Range getPower()
-    {
-        return power;
-    }
-
-    /**
-     * 
-     * @param power
-     */
-    public void setPower(Range power)
-    {
-        this.power = power;
-    }
 }

@@ -18,34 +18,88 @@
  */
 package de.guxx.ttdroid.lib.entity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ronny Dudeck
  */
-public interface Range
+public class Range implements Serializable
 {
+    private Integer ga1;
+    private Integer ga2;
+    private Integer eb;
+    private Integer sb;
 
     /**
      * 
      * @return
      */
-    public Integer getGa1();
+    public Integer getEb()
+    {
+        return eb;
+    }
+
+    /**
+     * 
+     * @param eb
+     */
+    public void setEb(Integer eb)
+    {
+        this.eb = eb;
+    }
 
     /**
      * 
      * @return
      */
-    public Integer getGa2();
+    public Integer getGa1()
+    {
+        return ga1;
+    }
+
+    /**
+     * 
+     * @param ga1
+     */
+    public void setGa1(Integer ga1)
+    {
+        this.ga1 = ga1;
+    }
 
     /**
      * 
      * @return
      */
-    public Integer getEb();
+    public Integer getGa2()
+    {
+        return ga2;
+    }
+
+    /**
+     * 
+     * @param ga2
+     */
+    public void setGa2(Integer ga2)
+    {
+        this.ga2 = ga2;
+    }
 
     /**
      * 
      * @return
      */
-    public Integer getSb();
+    public Integer getSb()
+    {
+        return sb;
+    }
+
+    /**
+     * 
+     * @param sb
+     */
+    public void setSb(Integer sb)
+    {
+        this.sb = sb;
+    }
 }
