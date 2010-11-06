@@ -25,4 +25,5 @@ package de.guxx.ttdroid.lib.dao;
  */
 public interface Dao<T>
 {
+    public T get();
 }

@@ -16,9 +16,9 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib;
+package de.guxx.ttdroid.lib.dao;
 
-import de.guxx.ttdroid.lib.dao.LocationDao;
+import de.guxx.ttdroid.lib.entity.Location;
 
 /**
  *
@@ -26,4 +26,9 @@ import de.guxx.ttdroid.lib.dao.LocationDao;
  */
 public class LocationDaoImpl implements LocationDao
 {
+    @Override
+    public Location get()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

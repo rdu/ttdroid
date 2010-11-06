@@ -30,25 +30,30 @@ import org.w3c.dom.NodeList;
  */
 public class UserDaoImpl implements UserDao
 {
-/*    public static User getCurrentUser()
+    @Override
+    public User get()
     {
-	String session = Settings.getSession();
-	TTXml result = TTXml.getInstance(session);
-	Document dom = result.getDomDocument("settings");
-	UserImpl user = new UserImpl(dom.getDocumentElement(), dom);
-
-	// find node for location an injecting to current user
-	NodeList displayList = dom.getElementsByTagName("location");
-	if (displayList != null)
-	{
-	    if (displayList.getLength() > 0)
-	    {
-		Element location = (Element) displayList.item(0);
-		user.setLocation(LocationFactory.createLocationFromElement(location, dom));
-	    }
-	}
-
-	return user;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
- */
+    /*    public static User getCurrentUser()
+    {
+    String session = Settings.getSession();
+    TTXml result = TTXml.getInstance(session);
+    Document dom = result.getDomDocument("settings");
+    UserImpl user = new UserImpl(dom.getDocumentElement(), dom);
+    
+    // find node for location an injecting to current user
+    NodeList displayList = dom.getElementsByTagName("location");
+    if (displayList != null)
+    {
+    if (displayList.getLength() > 0)
+    {
+    Element location = (Element) displayList.item(0);
+    user.setLocation(LocationFactory.createLocationFromElement(location, dom));
+    }
+    }
+    
+    return user;
+    }
+     */
 }
