@@ -19,6 +19,7 @@
 package de.guxx.ttdroid.lib.dao;
 
 import de.guxx.ttdroid.lib.entity.Location;
+import org.w3c.dom.Element;
 
 /**
  *
@@ -26,9 +27,22 @@ import de.guxx.ttdroid.lib.entity.Location;
  */
 public class LocationDaoImpl extends GenericTTXMLDaoImpl<Location> implements LocationDao
 {
+    private Element firstElement;
+
+    LocationDaoImpl(Element firstElement)
+    {
+        this.firstElement = firstElement;
+    }
+
     @Override
     protected Location read()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Location loc = new Location();
+
+        loc.setLatitude(getDouble(firstElement, "lat"));
+        loc.setLongitude(getDouble(firstElement, "lng"));
+        loc.setName(getString(firstElement, "name"));
+
+        return loc;
     }
 }

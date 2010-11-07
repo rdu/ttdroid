@@ -16,7 +16,6 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib.dao;
 
 import de.guxx.ttdroid.lib.exception.ElementNotFoundException;
@@ -63,9 +62,9 @@ public abstract class GenericTTXMLDaoImpl<T> implements Dao<T>
      * @return
      * @throws ElementNotFoundException
      */
-    protected final Element getFirstElement(Document document, String name) throws ElementNotFoundException
+    protected final Element getFirstElement(Element element, String name) throws ElementNotFoundException
     {
-        NodeList nl = document.getElementsByTagName(name);
+        NodeList nl = element.getElementsByTagName(name);
         if (nl != null)
         {
             if (nl.getLength() > 0)
@@ -82,11 +81,11 @@ public abstract class GenericTTXMLDaoImpl<T> implements Dao<T>
      * @param name
      * @return
      */
-    public String getString(Document document, String name)
+    public String getString(Element element, String name)
     {
         try
         {
-            Element e = getFirstElement(document, name);
+            Element e = getFirstElement(element, name);
             return e.getTextContent();
         } catch (ElementNotFoundException ex)
         {
@@ -96,10 +95,11 @@ public abstract class GenericTTXMLDaoImpl<T> implements Dao<T>
 
     /**
      * helper method to get (and parse) the double content of an element by name
+     * 
      * @param name
      * @return
      */
-    public Double getDouble(Document document, String name)
+    public Double getDouble(Element document, String name)
     {
         try
         {

@@ -19,9 +19,12 @@
 package de.guxx.ttdroid.lib.dao;
 
 import de.guxx.ttdroid.lib.Settings;
+import de.guxx.ttdroid.lib.entity.Location;
 import de.guxx.ttdroid.lib.entity.User;
+import de.guxx.ttdroid.lib.exception.ElementNotFoundException;
 import de.guxx.ttdroid.util.TTXml;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  *
@@ -36,16 +39,36 @@ public class UserDaoImpl extends GenericTTXMLDaoImpl<User> implements UserDao
         TTXml result = TTXml.getInstance(session);
         Document dom = result.getDomDocument("settings");
 
-        User user = readUser(dom);
+        User user = readUser(dom.getDocumentElement());
 
         return user;
     }
 
-    private User readUser(Document dom)
+    private User readUser(Element element)
     {
         User user = new User();
         
-        user.setEmail(getString(dom, "email"));
+        user.setSession(getString(element, "session"));
+        user.setEmail(getString(element, "email"));
+        user.setForeName(getString(element, "forename"));
+        user.setSurName(getString(element, "surname"));
+        user.setNick(getString(element, "nick"));
+        user.setIntroduction(getString(element, "introduction"));
+        user.setHeight(getDouble(element, "height").floatValue());
+                
+        String g = getString(element, "gender");
+        if (g.equals("m")) user.setGender(User.Gender.m);
+        if (g.equals("f")) user.setGender(User.Gender.f);
+       
+        try
+        {
+            LocationDao locationDao = new LocationDaoImpl(getFirstElement(element, "location"));
+            Location location = locationDao.get();
+            user.setLocation(location);
+        }
+        catch (ElementNotFoundException e)
+        {            
+        }
         
         return user;
     }
