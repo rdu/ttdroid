@@ -24,10 +24,10 @@ import de.guxx.ttdroid.lib.entity.Location;
  *
  * @author rdu
  */
-public class LocationDaoImpl implements LocationDao
+public class LocationDaoImpl extends GenericTTXMLDaoImpl<Location> implements LocationDao
 {
     @Override
-    public Location get()
+    protected Location read()
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }

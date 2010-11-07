@@ -18,42 +18,35 @@
  */
 package de.guxx.ttdroid.lib.dao;
 
+import de.guxx.ttdroid.lib.Settings;
 import de.guxx.ttdroid.lib.entity.User;
 import de.guxx.ttdroid.util.TTXml;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 /**
  *
  * @author rdu
  */
-public class UserDaoImpl implements UserDao
+public class UserDaoImpl extends GenericTTXMLDaoImpl<User> implements UserDao
 {
     @Override
-    public User get()
+    protected User read()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String session = Settings.getSession();
+        TTXml result = TTXml.getInstance(session);
+        Document dom = result.getDomDocument("settings");
+
+        User user = readUser(dom);
+
+        return user;
     }
-    /*    public static User getCurrentUser()
+
+    private User readUser(Document dom)
     {
-    String session = Settings.getSession();
-    TTXml result = TTXml.getInstance(session);
-    Document dom = result.getDomDocument("settings");
-    UserImpl user = new UserImpl(dom.getDocumentElement(), dom);
-    
-    // find node for location an injecting to current user
-    NodeList displayList = dom.getElementsByTagName("location");
-    if (displayList != null)
-    {
-    if (displayList.getLength() > 0)
-    {
-    Element location = (Element) displayList.item(0);
-    user.setLocation(LocationFactory.createLocationFromElement(location, dom));
+        User user = new User();
+        
+        user.setEmail(getString(dom, "email"));
+        
+        return user;
     }
-    }
-    
-    return user;
-    }
-     */
 }
