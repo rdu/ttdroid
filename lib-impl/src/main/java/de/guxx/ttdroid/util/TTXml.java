@@ -18,6 +18,7 @@
  */
 package de.guxx.ttdroid.util;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -27,6 +28,9 @@ import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -37,7 +41,6 @@ public class TTXml
     /*
      * constants
      */
-
     private final String baseUrl = "http://trainingstagebuch.org/";
     /*
      * private member variables
@@ -58,14 +61,13 @@ public class TTXml
      */
     public static TTXml getInstance(String sessionId)
     {
-	TTXmlHolder.INSTANCE.setSessionId(sessionId);
-	return TTXmlHolder.INSTANCE;
+        TTXmlHolder.INSTANCE.setSessionId(sessionId);
+        return TTXmlHolder.INSTANCE;
     }
 
     private static class TTXmlHolder
     {
-
-	private static final TTXml INSTANCE = new TTXml();
+        private static final TTXml INSTANCE = new TTXml();
     }
 
     /**
@@ -76,7 +78,7 @@ public class TTXml
      */
     public void setSessionId(String sessionId)
     {
-	this.sessionId = sessionId;
+        this.sessionId = sessionId;
     }
 
     /**
@@ -90,33 +92,33 @@ public class TTXml
      */
     public Document getDomDocument(String command, Map<String, Object> parameter)
     {
-	try
-	{
-	    URL url = buildUrl(command, parameter);
-	    URLConnection uc = url.openConnection();
+        try
+        {
+            URL url = buildUrl(command, parameter);
+            URLConnection uc = url.openConnection();
 
-	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-	    DocumentBuilder db = dbf.newDocumentBuilder();
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
 
-	    Document doc = db.parse(uc.getInputStream());
-	    return doc;
-	}
-	catch (Exception ex)
-	{
-	    Logger.getLogger(TTXml.class.getName()).log(Level.SEVERE, null, ex);
-	}
-	return null;
+            Document doc = db.parse(uc.getInputStream());
+            return doc;
+            
+        } catch (Exception ex)
+        {
+            Logger.getLogger(TTXml.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     /**
      * without parameter
-
+    
      * @param command
      * @return
      */
     public Document getDomDocument(String command)
     {
-	return getDomDocument(command, null);
+        return getDomDocument(command, null);
     }
 
     /**
@@ -125,7 +127,7 @@ public class TTXml
      */
     public String getSessionId()
     {
-	return sessionId;
+        return sessionId;
     }
 
     /**
@@ -137,35 +139,37 @@ public class TTXml
      */
     public URL buildUrl(String command, Map<String, Object> parameter)
     {
-	try
-	{
-	    if (command.isEmpty()) return new URL(baseUrl);
-	    StringBuilder url = new StringBuilder(baseUrl);
-	    url.append(command);
-	    url.append("?view=xml");
-	    url.append("&sso=");
-	    url.append(getSessionId());
-	    boolean first = true;
-	    if (parameter != null)
-	    {
-		for (Map.Entry entry : parameter.entrySet())
-		{
-		    if (first)
-		    {
-			url.append('&');
-			first = false;
-		    }
-		    url.append(entry.getKey());
-		    url.append('=');
-		    url.append(entry.getValue().toString());
-		}
-	    }
-	    return new URL(url.toString());
-	}
-	catch (MalformedURLException ex)
-	{
-	    Logger.getLogger(TTXml.class.getName()).log(Level.INFO, null, ex);
-	}
-	return null;
+        try
+        {
+            if (command.isEmpty())
+            {
+                return new URL(baseUrl);
+            }
+            StringBuilder url = new StringBuilder(baseUrl);
+            url.append(command);
+            url.append("?view=xml");
+            url.append("&sso=");
+            url.append(getSessionId());
+            boolean first = true;
+            if (parameter != null)
+            {
+                for (Map.Entry entry : parameter.entrySet())
+                {
+                    if (first)
+                    {
+                        url.append('&');
+                        first = false;
+                    }
+                    url.append(entry.getKey());
+                    url.append('=');
+                    url.append(entry.getValue().toString());
+                }
+            }
+            return new URL(url.toString());
+        } catch (MalformedURLException ex)
+        {
+            Logger.getLogger(TTXml.class.getName()).log(Level.INFO, null, ex);
+        }
+        return null;
     }
 }

@@ -19,7 +19,6 @@
 package de.guxx.ttdroid.lib.dao;
 
 import de.guxx.ttdroid.lib.exception.ElementNotFoundException;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
