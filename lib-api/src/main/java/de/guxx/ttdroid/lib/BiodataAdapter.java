@@ -16,19 +16,37 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib.dao;
+
+package de.guxx.ttdroid.lib;
+
+import de.guxx.ttdroid.lib.exception.BiodataAdapterException;
+
 
 /**
- * simple dao interface
- * 
- * @param <T> 
+ *
  * @author rdu
  */
-public interface Dao<T>
-{
+public interface BiodataAdapter
+{    
     /**
+     * initiates the bio measurement
+     * 
+     * @throws BiodataAdapterException
+     */
+    public void init() throws BiodataAdapterException;
+    /**
+     * collect's the bio data
+     * to the biodata container
+     * class
      * 
      * @return
+     * @throws BiodataAdapterException
      */
-    public T get();
+    public BioData getHeartrateData() throws BiodataAdapterException;
+    /**
+     * destroy's the biodata-measurement
+     * 
+     * @throws BiodataAdapterException
+     */
+    public void dispose() throws BiodataAdapterException;
 }

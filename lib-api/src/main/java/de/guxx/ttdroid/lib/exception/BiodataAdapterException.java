@@ -16,19 +16,28 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib.dao;
+
+package de.guxx.ttdroid.lib.exception;
 
 /**
- * simple dao interface
- * 
- * @param <T> 
+ *
  * @author rdu
  */
-public interface Dao<T>
+public class BiodataAdapterException extends Exception
 {
     /**
-     * 
-     * @return
+     * Creates a new instance of <code>BiodataAdapterException</code> without detail message.
      */
-    public T get();
+    public BiodataAdapterException()
+    {
+    }
+
+    /**
+     * Constructs an instance of <code>BiodataAdapterException</code> with the specified detail message.
+     * @param msg the detail message.
+     */
+    public BiodataAdapterException(String msg)
+    {
+        super(msg);
+    }
 }
