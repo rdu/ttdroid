@@ -9,122 +9,125 @@
     <name>ttdroid</name>
 
     <parent>
-        <groupId>de.guxx.ttdroid</groupId>
-        <artifactId>main</artifactId>
-        <version>1.0-SNAPSHOT</version>
+	<groupId>de.guxx.ttdroid</groupId>
+	<artifactId>main</artifactId>
+	<version>1.0-SNAPSHOT</version>
     </parent>
 
     <dependencies>
 
-        <dependency>
-            <groupId>de.guxx.ttdroid</groupId>
-            <artifactId>lib-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+	<dependency>
+	    <groupId>de.guxx.ttdroid</groupId>
+	    <artifactId>lib-api</artifactId>
+	    <version>1.0-SNAPSHOT</version>
+	</dependency>
 
-        <dependency>
-            <groupId>de.guxx.ttdroid</groupId>
-            <artifactId>lib-impl</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+	<dependency>
+	    <groupId>de.guxx.ttdroid</groupId>
+	    <artifactId>lib-impl</artifactId>
+	    <version>1.0-SNAPSHOT</version>
+	</dependency>
 
-        <dependency>
-            <groupId>com.google.android</groupId>
-            <artifactId>android</artifactId>
-            <version>2.2.1</version>
-            <scope>provided</scope>
-        </dependency>
+	<dependency>
+	    <groupId>com.google.android</groupId>
+	    <artifactId>android</artifactId>
+	    <version>2.2.1</version>
+	    <scope>provided</scope>
+	</dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.2</version>
-            <scope>test</scope>
-        </dependency>
+	<dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.8.2</version>
+	    <scope>test</scope>
+	</dependency>
 
 
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-                <artifactId>maven-android-plugin</artifactId>
-                <version>2.5.1</version>
-                <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <id>android-undeploy</id>
-                        <phase>pre-clean</phase>
-                        <goals>
-                            <goal>undeploy</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>android-deploy</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
+	<plugins>
+	    <plugin>
+		<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+		<artifactId>maven-android-plugin</artifactId>
+		<version>2.5.1</version>
+		<extensions>true</extensions>
+		<executions>
+		    <execution>
+			<id>android-undeploy</id>
+			<phase>pre-clean</phase>
+			<goals>
+			    <goal>undeploy</goal>
+			</goals>
+		    </execution>
+		    <execution>
+			<id>android-deploy</id>
+			<phase>install</phase>
+			<goals>
+			    <goal>deploy</goal>
+			</goals>
+		    </execution>
+		</executions>
+		<configuration>
+		    <undeployBeforeDeploy>true</undeployBeforeDeploy>
+		</configuration>
+	    </plugin>
+	    <plugin>
+		<artifactId>maven-compiler-plugin</artifactId>
+		<configuration>
+		    <source>1.6</source>
+		    <target>1.6</target>
+		</configuration>
+	    </plugin>
             
-            <plugin>
-                <groupId>com.mycila.maven-license-plugin</groupId>
-                <artifactId>maven-license-plugin</artifactId>
-                <version>1.5.0</version>
-                <configuration>
-                    <header>src/etc/header.txt</header>
-                    <properties>
-                        <year>2010-2010</year>
-                        <owner>Ronny Dudeck</owner>
-                        <email>ich@ronny-dudeck.de</email>
-                    </properties>
-                    <excludes>
-                        <exclude>AndroidManifest.xml</exclude>
-                        <exclude>res/*</exclude>
-                    </excludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+	    <plugin>
+		<groupId>com.mycila.maven-license-plugin</groupId>
+		<artifactId>maven-license-plugin</artifactId>
+		<version>1.5.0</version>
+		<configuration>
+		    <header>src/etc/header.txt</header>
+		    <properties>
+			<year>2010-2010</year>
+			<owner>Ronny Dudeck</owner>
+			<email>ich@ronny-dudeck.de</email>
+		    </properties>
+		    <excludes>
+			<exclude>AndroidManifest.xml</exclude>
+			<exclude>res/*</exclude>
+		    </excludes>
+		</configuration>
+		<executions>
+		    <execution>
+			<phase>test</phase>
+			<goals>
+			    <goal>check</goal>
+			</goals>
+		    </execution>
+		</executions>
+	    </plugin>
 
-        </plugins>
+	</plugins>
     </build>
 
     <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <configuration>
-                    <configLocation>config/sun_checks.xml</configLocation>
-                </configuration>
-            </plugin>
-        </plugins>
+	<plugins>
+	    <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-checkstyle-plugin</artifactId>
+		<configuration>
+		    <configLocation>config/sun_checks.xml</configLocation>
+		</configuration>
+	    </plugin>
+	</plugins>
     </reporting>
 
     <licenses>
-        <license>
-            <name>GNU General Public License version 3</name>
-            <url>http://www.gnu.org/licenses/gpl.txt</url>
-            <distribution>repo</distribution>
-            <comments />
-        </license>
+	<license>
+	    <name>GNU General Public License version 3</name>
+	    <url>http://www.gnu.org/licenses/gpl.txt</url>
+	    <distribution>repo</distribution>
+	    <comments />
+	</license>
     </licenses>
 
 </project>
