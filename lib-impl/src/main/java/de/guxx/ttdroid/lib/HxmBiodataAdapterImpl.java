@@ -19,8 +19,11 @@
 package de.guxx.ttdroid.lib;
 
 import android.bluetooth.BluetoothAdapter;
-import android.content.Intent;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import de.guxx.ttdroid.lib.exception.BiodataAdapterException;
+import java.util.Set;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,8 +39,10 @@ public class HxmBiodataAdapterImpl implements BiodataAdapter
 
     private class BioDataThread extends Thread
     {
-
+	private final UUID deviceUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 	private BluetoothAdapter bluetoothAdapter;
+	private final BluetoothSocket bluetoothSocket;
+	private final BluetoothDevice bluetoothDevice;
 
 	public BioDataThread() throws Exception
 	{
@@ -48,13 +53,33 @@ public class HxmBiodataAdapterImpl implements BiodataAdapter
 		throw new BiodataAdapterException("device does not support bluetooth");
 	    }
 	    logger.info("got bluetooth adapter");
-	    
+
 	    if (!bluetoothAdapter.isEnabled())
 	    {
 		logger.info("bluetooth adapter not enabled");
 		throw new BiodataAdapterException("need activated bluetooth for working");
 	    }
 	    logger.info("bluetooth is enabled");
+
+	    bluetoothDevice = getHXMDevice();
+
+	    logger.info("using device: " + bluetoothDevice.getName());
+	    
+	    BluetoothSocket tempSocket = null;
+	    
+	    try
+	    {
+		logger.info("try creating socket, device uuid: " + deviceUUID.toString());
+		tempSocket = bluetoothDevice.createRfcommSocketToServiceRecord(deviceUUID);		
+	    }
+	    catch (Exception e)
+	    {
+		throw new BiodataAdapterException(e.getMessage());
+	    }
+	    
+	    bluetoothSocket = tempSocket;
+	    
+	    logger.info("socket created successfully");
 	}
 
 	@Override
@@ -72,6 +97,22 @@ public class HxmBiodataAdapterImpl implements BiodataAdapter
 	    {
 		logger.info("got interrupted exception msg: " + ie.getMessage());
 	    }
+	}
+
+	private BluetoothDevice getHXMDevice() throws BiodataAdapterException
+	{
+	    Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
+	    logger.info("looking for paired devices");
+	    if (pairedDevices.isEmpty()) throw new BiodataAdapterException("no paired devices");
+	    for (BluetoothDevice device : pairedDevices)
+	    {
+		logger.info("probing device: " + device.getName() + ", " + device.getAddress());
+		if (device.getName().startsWith("HXM"))
+		{
+		    return device;
+		}
+	    }
+	    throw new BiodataAdapterException("found no matching paired device");
 	}
     }
 
