@@ -33,7 +33,7 @@ public class HxmBiodataAdapterImpl implements BiodataAdapter
     }
 
     @Override
-    public BioData getHeartrateData() throws BiodataAdapterException
+    public BioData getBioData() throws BiodataAdapterException
     {
         return null;
     }

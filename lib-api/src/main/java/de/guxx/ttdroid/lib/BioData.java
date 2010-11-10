@@ -19,12 +19,15 @@
 
 package de.guxx.ttdroid.lib;
 
+import java.util.Date;
+
 /**
  *
  * @author rdu
  */
 public class BioData
 {
+    private Date timestamp;
     private Integer heartRate;
     private Integer beatNumber;
     private Integer batteryPercent;
@@ -33,6 +36,42 @@ public class BioData
     private Integer speed;
     private Integer cadence;
 
+    @Override
+    public String toString()
+    {
+	StringBuilder sb = new StringBuilder();
+	sb.append("time: ");
+	sb.append(getTimestamp().toString());
+	sb.append("\n");
+	sb.append("heartrate: ");
+	sb.append(getHeartRate().toString());
+	sb.append("\n");
+	sb.append("steps: ");
+	sb.append(getStrides().toString());
+	sb.append("\n");
+	sb.append("speed: ");
+	sb.append(getSpeed().toString());
+	sb.append("\n");
+	sb.append("distance: ");
+	sb.append(getDistance().toString());
+	sb.append("\n");
+	sb.append("cadence: ");
+	sb.append(getCadence().toString());
+	sb.append("\n");
+
+	return sb.toString();
+    }
+
+    public Date getTimestamp()
+    {
+	return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp)
+    {
+	this.timestamp = timestamp;
+    }
+       
     /**
      * 
      * @return

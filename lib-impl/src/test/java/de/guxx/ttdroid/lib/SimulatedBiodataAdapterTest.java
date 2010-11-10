@@ -16,33 +16,52 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib.exception;
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package de.guxx.ttdroid.lib;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author rdu
  */
-public class BiodataAdapterException extends Exception
+public class SimulatedBiodataAdapterTest
 {
 
-    /**
-     * Creates a new instance of <code>BiodataAdapterException</code> without detail message.
-     */
-    public BiodataAdapterException()
+    public SimulatedBiodataAdapterTest()
     {
     }
 
-    /**
-     * Constructs an instance of <code>BiodataAdapterException</code> with the specified detail message.
-     * @param msg the detail message.
-     */
-    public BiodataAdapterException(String msg)
+    @Before
+    public void setUp()
     {
-	super(msg);
     }
 
-    public BiodataAdapterException(Exception e)
+    @After
+    public void tearDown()
     {
-	super(e);
+    }
+
+    @Test
+    public void testGetBioData() throws Exception
+    {
+	SimulatedBiodataAdapter sba = new SimulatedBiodataAdapter();
+	sba.init();
+	
+	for (int n = 0; n < 20; n++)
+	{
+	    assertNotNull(sba.getBioData());
+	    System.out.println(sba.getBioData());
+	    Thread.sleep(300);
+	}
+	
+	sba.dispose();
     }
 }

@@ -42,7 +42,7 @@ public interface BiodataAdapter
      * @return
      * @throws BiodataAdapterException
      */
-    public BioData getHeartrateData() throws BiodataAdapterException;
+    public BioData getBioData() throws BiodataAdapterException;
     /**
      * destroy's the biodata-measurement
      * 
