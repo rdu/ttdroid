@@ -17,14 +17,28 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.guxx.ttdroid.lib.dao;
-
-import de.guxx.ttdroid.lib.entity.User;
+package de.guxx.ttdroid.lib.exception;
 
 /**
  *
  * @author rdu
  */
-public interface UserDao extends TTDao<User>
+public class DatabaseException extends Exception
 {
+
+    /**
+     * Creates a new instance of <code>DatabaseException</code> without detail message.
+     */
+    public DatabaseException()
+    {
+    }
+
+    /**
+     * Constructs an instance of <code>DatabaseException</code> with the specified detail message.
+     * @param msg the detail message.
+     */
+    public DatabaseException(String msg)
+    {
+	super(msg);
+    }
 }

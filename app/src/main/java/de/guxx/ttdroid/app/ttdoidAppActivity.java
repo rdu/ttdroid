@@ -26,8 +26,12 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Bundle;
 import de.guxx.ttdroid.lib.BiodataAdapter;
+import de.guxx.ttdroid.lib.Database;
 import de.guxx.ttdroid.lib.HxmBiodataAdapterImpl;
+import de.guxx.ttdroid.lib.dao.SnapshotDao;
+import de.guxx.ttdroid.lib.dao.SnapshotDaoImpl;
 import de.guxx.ttdroid.lib.exception.BiodataAdapterException;
+import de.guxx.ttdroid.lib.exception.DaoException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -57,7 +61,7 @@ public class ttdoidAppActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.main);
+	setContentView(R.layout.main);	
 	biodataAdapter = new HxmBiodataAdapterImpl();
     }
 
@@ -67,6 +71,7 @@ public class ttdoidAppActivity extends Activity
 	try
 	{
 	    biodataAdapter.init();
+	    SnapshotDao snapshotDao = new SnapshotDaoImpl();
 	}
 	catch (Exception ex)
 	{
@@ -81,6 +86,7 @@ public class ttdoidAppActivity extends Activity
 	try
 	{
 	    biodataAdapter.dispose();
+	    Database.getInstance().dispose();
 	}
 	catch (Exception ex)
 	{

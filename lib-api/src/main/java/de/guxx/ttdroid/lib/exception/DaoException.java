@@ -17,14 +17,37 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.guxx.ttdroid.lib.dao;
-
-import de.guxx.ttdroid.lib.entity.User;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package de.guxx.ttdroid.lib.exception;
 
 /**
  *
  * @author rdu
  */
-public interface UserDao extends TTDao<User>
+public class DaoException extends Exception
 {
+
+    /**
+     * Creates a new instance of <code>DaoException</code> without detail message.
+     */
+    public DaoException()
+    {
+    }
+
+    /**
+     * Constructs an instance of <code>DaoException</code> with the specified detail message.
+     * @param msg the detail message.
+     */
+    public DaoException(String msg)
+    {
+	super(msg);
+    }
+
+    public DaoException(DatabaseException ex)
+    {
+	super(ex);
+    }
 }

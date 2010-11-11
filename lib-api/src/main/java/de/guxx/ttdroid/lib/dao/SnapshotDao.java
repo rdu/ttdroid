@@ -19,12 +19,12 @@
 
 package de.guxx.ttdroid.lib.dao;
 
-import de.guxx.ttdroid.lib.entity.User;
+import de.guxx.ttdroid.lib.entity.Snapshot;
 
 /**
  *
  * @author rdu
  */
-public interface UserDao extends TTDao<User>
+public interface SnapshotDao extends Dao<Snapshot, String>
 {
 }

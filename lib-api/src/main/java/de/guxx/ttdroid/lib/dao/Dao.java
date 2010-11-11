@@ -19,12 +19,12 @@
 
 package de.guxx.ttdroid.lib.dao;
 
-import de.guxx.ttdroid.lib.entity.User;
-
 /**
  *
  * @author rdu
  */
-public interface UserDao extends TTDao<User>
+public interface Dao<C, K>
 {
+    public C getByFK(K key);
+    public void insert(C object);
 }

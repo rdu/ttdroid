@@ -26,7 +26,7 @@ import org.w3c.dom.NodeList;
  *
  * @author rdu
  */
-public abstract class GenericTTXMLDaoImpl<T> implements Dao<T>
+public abstract class GenericTTXMLDaoImpl<T> implements TTDao<T>
 {
     @Override
     public T get()

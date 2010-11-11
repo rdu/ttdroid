@@ -16,19 +16,43 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package de.guxx.ttdroid.lib.dao;
 
+import de.guxx.ttdroid.lib.exception.DaoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 /**
- * simple dao interface
- * 
- * @param <T> 
+ *
  * @author rdu
  */
-public interface Dao<T>
+public class SnapshotDaoImplTest
 {
+
+    public SnapshotDaoImplTest()
+    {
+    }
+
+    @Before
+    public void setUp()
+    {
+    }
+
     /**
-     * 
-     * @return
+     * Test of getTableName method, of class SnapshotDaoImpl.
      */
-    public T get();
+    @Test
+    public void testGetTableName()
+    {
+    }
 }

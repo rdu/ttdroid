@@ -16,15 +16,26 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib.dao;
 
-import de.guxx.ttdroid.lib.entity.User;
+import de.guxx.ttdroid.lib.entity.Snapshot;
+import de.guxx.ttdroid.lib.exception.DaoException;
 
 /**
  *
  * @author rdu
  */
-public interface UserDao extends TTDao<User>
+public class SnapshotDaoImpl extends GenericDao<Snapshot, String> implements SnapshotDao
 {
+
+    public SnapshotDaoImpl() throws DaoException
+    {
+	super();
+    }
+
+    @Override
+    protected Class getParameterClass()
+    {
+	return Snapshot.class;
+    }
 }

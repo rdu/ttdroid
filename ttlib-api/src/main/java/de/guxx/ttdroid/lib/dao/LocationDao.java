@@ -25,6 +25,6 @@ import de.guxx.ttdroid.lib.entity.Location;
  *
  * @author rdu
  */
-public interface LocationDao extends Dao<Location>
+public interface LocationDao extends TTDao<Location>
 {
 }

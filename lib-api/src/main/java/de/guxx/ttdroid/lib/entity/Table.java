@@ -17,14 +17,20 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.guxx.ttdroid.lib.dao;
+package de.guxx.ttdroid.lib.entity;
 
-import de.guxx.ttdroid.lib.entity.User;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  *
  * @author rdu
  */
-public interface UserDao extends TTDao<User>
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface Table
 {
+    String name();
 }

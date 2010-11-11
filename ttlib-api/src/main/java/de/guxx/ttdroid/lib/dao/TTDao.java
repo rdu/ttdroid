@@ -16,15 +16,19 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib.dao;
 
-import de.guxx.ttdroid.lib.entity.User;
-
 /**
- *
+ * simple dao interface
+ * 
+ * @param <T> 
  * @author rdu
  */
-public interface UserDao extends TTDao<User>
+public interface TTDao<T>
 {
+    /**
+     * 
+     * @return
+     */
+    public T get();
 }
