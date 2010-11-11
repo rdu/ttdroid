@@ -18,9 +18,15 @@
     <dependencies>
 
         <dependency>
-            <groupId>de.guxx.ttdroid</groupId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>ttlib-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>lib-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
 	<dependency>

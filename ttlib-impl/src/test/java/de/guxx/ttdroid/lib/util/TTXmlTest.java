@@ -16,9 +16,8 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.util;
+package de.guxx.ttdroid.lib.util;
 
-import de.guxx.ttdroid.lib.Settings;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;

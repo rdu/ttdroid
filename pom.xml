@@ -13,6 +13,8 @@
 	<module>app</module>
 	<module>lib-impl</module>
 	<module>lib-api</module>
+	<module>ttlib-api</module>
+	<module>ttlib-impl</module>
     </modules>
     <build>
 	<plugins>

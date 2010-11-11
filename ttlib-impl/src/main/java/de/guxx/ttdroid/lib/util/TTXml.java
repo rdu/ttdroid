@@ -16,7 +16,7 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.util;
+package de.guxx.ttdroid.lib.util;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

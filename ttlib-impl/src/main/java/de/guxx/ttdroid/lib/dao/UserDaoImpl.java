@@ -18,11 +18,11 @@
  */
 package de.guxx.ttdroid.lib.dao;
 
-import de.guxx.ttdroid.lib.Settings;
+import de.guxx.ttdroid.lib.util.Settings;
 import de.guxx.ttdroid.lib.entity.Location;
 import de.guxx.ttdroid.lib.entity.User;
 import de.guxx.ttdroid.lib.exception.ElementNotFoundException;
-import de.guxx.ttdroid.util.TTXml;
+import de.guxx.ttdroid.lib.util.TTXml;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

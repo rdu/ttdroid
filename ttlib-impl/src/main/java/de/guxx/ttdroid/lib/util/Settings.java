@@ -16,7 +16,7 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib;
+package de.guxx.ttdroid.lib.util;
 
 /**
  *
