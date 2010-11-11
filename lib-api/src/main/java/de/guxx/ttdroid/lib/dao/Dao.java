@@ -19,12 +19,14 @@
 
 package de.guxx.ttdroid.lib.dao;
 
+import de.guxx.ttdroid.lib.exception.DaoException;
+
 /**
  *
  * @author rdu
  */
 public interface Dao<C, K>
 {
-    public C getByFK(K key);
-    public void insert(C object);
+    public C getByFK(K key) throws DaoException;
+    public void insert(C object) throws DaoException;
 }

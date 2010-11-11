@@ -30,6 +30,7 @@ import de.guxx.ttdroid.lib.Database;
 import de.guxx.ttdroid.lib.HxmBiodataAdapterImpl;
 import de.guxx.ttdroid.lib.dao.SnapshotDao;
 import de.guxx.ttdroid.lib.dao.SnapshotDaoImpl;
+import de.guxx.ttdroid.lib.entity.Snapshot;
 import de.guxx.ttdroid.lib.exception.BiodataAdapterException;
 import de.guxx.ttdroid.lib.exception.DaoException;
 import java.io.IOException;
@@ -72,6 +73,13 @@ public class ttdoidAppActivity extends Activity
 	{
 	    biodataAdapter.init();
 	    SnapshotDao snapshotDao = new SnapshotDaoImpl();
+	    Snapshot s = new Snapshot();
+	    s.setBattery(100);
+	    s.setCadence(10);
+	    s.setHeartrate(79);
+	    s.setLatitude(12.21f);
+	    s.setLongitude(12.21f);
+	    snapshotDao.insert(s);
 	}
 	catch (Exception ex)
 	{

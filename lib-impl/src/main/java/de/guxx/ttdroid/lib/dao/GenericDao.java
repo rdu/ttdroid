@@ -28,6 +28,7 @@ import de.guxx.ttdroid.lib.exception.DatabaseException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -39,7 +40,7 @@ public abstract class GenericDao<C, K> implements Dao<C, K>
     protected static final Logger logger = Logger.getLogger(GenericDao.class.getName());
 
     private SQLiteDatabase database;
-    private Map<String, Column>columnMap = new HashMap<String, Column>();
+    private Map<String, Field>columnMap = new HashMap<String, Field>();
 
     public GenericDao() throws DaoException
     {
@@ -65,13 +66,57 @@ public abstract class GenericDao<C, K> implements Dao<C, K>
     }
 
     @Override
-    public void insert(C object)
+    public void insert(C object) throws DaoException
     {
-	throw new UnsupportedOperationException("Not supported yet.");
+	logger.info("inserting into table: " + getTableName());	
+	
+	StringBuilder sb = new StringBuilder("insert into ");
+	sb.append(getTableName());
+	sb.append(" (");
+	for (Map.Entry<String, Field> entry : columnMap.entrySet())
+	{
+	    Column c = entry.getValue().getAnnotation(Column.class);
+	    if (!c.primary()) sb.append(c.name());
+	    else sb.append("_id");
+	    sb.append(", ");
+	}
+	sb.delete(sb.length()-2, sb.length());
+	sb.append(") values(");
+	for (Map.Entry<String, Field> entry : columnMap.entrySet())
+	{
+	    Field f = entry.getValue();
+	    f.setAccessible(true);
+	    try
+	    {
+		sb.append("'").append(f.get(object)).append("'").append(", ");
+	    }
+	    catch (IllegalArgumentException ex)
+	    {
+		logger.info("illegal argument while accessing field:" + f.getName());
+	    }
+	    catch (IllegalAccessException ex)
+	    {
+		logger.info("illegal access while accessing field:" + f.getName());
+	    }
+	    f.setAccessible(false);
+	}
+	sb.delete(sb.length()-2, sb.length());
+	sb.append(");");
+	
+	logger.info("insert query: " + sb.toString());
+	
+	try
+	{
+	    database.execSQL(sb.toString());
+	}
+	catch(Exception e)
+	{
+	    throw new DaoException("could not insert: " + e.getMessage());
+	}
     }
 
     @Override
-    public C getByFK(K key)
+    public C getByFK(K key) throws DaoException
     {
 	throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -96,7 +141,7 @@ public abstract class GenericDao<C, K> implements Dao<C, K>
 	    if (c != null)
 	    {
 		logger.info("--> annotation column: " + c.name());
-		columnMap.put(c.name(), c);
+		columnMap.put(c.name(), field);
 	    }
 	}	
     }
@@ -108,9 +153,9 @@ public abstract class GenericDao<C, K> implements Dao<C, K>
 	StringBuilder sb = new StringBuilder("create table ");
 	sb.append(getTableName());
 	sb.append(" (");
-	for (Map.Entry<String, Column> entry : columnMap.entrySet())
+	for (Map.Entry<String, Field> entry : columnMap.entrySet())
 	{
-	    Column c = entry.getValue();
+	    Column c = entry.getValue().getAnnotation(Column.class);
 	    if (!c.primary()) sb.append(c.name());
 	    else sb.append("_id");
 	    sb.append(" ");
