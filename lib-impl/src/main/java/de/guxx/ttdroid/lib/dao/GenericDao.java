@@ -51,10 +51,11 @@ public abstract class GenericDao<C, K> implements Dao<C, K>
 	    database = Database.getInstance().getDatabase();
 	    try
 	    {
-		database.execSQL("select * from " + getTableName());
+		database.query(getTableName(), null, null, null, null, null, null);
 	    }
 	    catch(SQLException se)
 	    {
+		logger.info("error select from: " + se.getMessage());
 		createTable();
 	    }
 	}
