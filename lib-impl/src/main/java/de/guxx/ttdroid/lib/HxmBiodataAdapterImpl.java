@@ -44,12 +44,17 @@ public class HxmBiodataAdapterImpl implements BiodataAdapter
 
 	private final UUID deviceUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 	private BluetoothAdapter bluetoothAdapter;
-	private final BluetoothSocket bluetoothSocket;
-	private final BluetoothDevice bluetoothDevice;
+	private BluetoothSocket bluetoothSocket;
+	private BluetoothDevice bluetoothDevice;
 
 	public BioDataThread() throws Exception
 	{
 	    bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+	    reconnect();
+	}
+
+	private void reconnect() throws Exception
+	{
 	    if (bluetoothAdapter == null)
 	    {
 		logger.info("device does not support bluetooth");
@@ -103,23 +108,45 @@ public class HxmBiodataAdapterImpl implements BiodataAdapter
 	    logger.info("running thread");
 	    try
 	    {
-		try
+		while (!isInterrupted())
 		{
-		    InputStream in = bluetoothSocket.getInputStream();
-
-		    HxmReader hr = new HxmReader(in);
-		    logger.info("init hxmreader reader");
-
-		    while (!isInterrupted())
+		    try
 		    {
-			HxmPaket paket = hr.read();
-			paket.validate();
-			logger.info(paket.toString());
+			InputStream in = bluetoothSocket.getInputStream();
+
+			HxmReader hr = new HxmReader(in);
+			logger.info("init hxmreader reader");
+
+			while (!isInterrupted())
+			{
+			    HxmPaket paket = hr.read();
+			    paket.validate();
+			    logger.info(paket.toString());
+			}
 		    }
-		}
-		catch (IOException ex)
-		{
-		    logger.severe("could not get input stream");
+		    catch (IOException ex)
+		    {
+			logger.severe("could not get input stream");
+			Thread.sleep(500);
+			logger.info("sleept 500ms");
+			logger.info("try'in reconnect");
+			try
+			{
+			    bluetoothSocket.close();
+			}
+			catch (Exception e)
+			{
+			    logger.info("could not close socket");
+			}
+			try
+			{
+			    reconnect();
+			}
+			catch(Exception e)
+			{
+			    logger.info("error reconnecting");
+			}
+		    }
 		}
 	    }
 	    catch (Exception ie)
