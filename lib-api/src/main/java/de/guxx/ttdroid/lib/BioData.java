@@ -32,9 +32,9 @@ public class BioData
     private Integer beatNumber;
     private Integer batteryPercent;
     private Integer strides;
-    private Integer distance;
-    private Integer speed;
-    private Integer cadence;
+    private Double distance;
+    private Double speed;
+    private Double cadence;
 
     @Override
     public String toString()
@@ -112,7 +112,7 @@ public class BioData
      * 
      * @return
      */
-    public Integer getCadence()
+    public Double getCadence()
     {
         return cadence;
     }
@@ -121,7 +121,7 @@ public class BioData
      * 
      * @param cadence
      */
-    public void setCadence(Integer cadence)
+    public void setCadence(Double cadence)
     {
         this.cadence = cadence;
     }
@@ -130,7 +130,7 @@ public class BioData
      * 
      * @return
      */
-    public Integer getDistance()
+    public Double getDistance()
     {
         return distance;
     }
@@ -139,7 +139,7 @@ public class BioData
      * 
      * @param distance
      */
-    public void setDistance(Integer distance)
+    public void setDistance(Double distance)
     {
         this.distance = distance;
     }
@@ -166,7 +166,7 @@ public class BioData
      * 
      * @return
      */
-    public Integer getSpeed()
+    public Double getSpeed()
     {
         return speed;
     }
@@ -175,7 +175,7 @@ public class BioData
      * 
      * @param speed
      */
-    public void setSpeed(Integer speed)
+    public void setSpeed(Double speed)
     {
         this.speed = speed;
     }

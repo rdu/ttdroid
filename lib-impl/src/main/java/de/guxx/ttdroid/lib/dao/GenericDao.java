@@ -28,7 +28,6 @@ import de.guxx.ttdroid.lib.exception.DatabaseException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**

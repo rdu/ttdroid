@@ -46,11 +46,22 @@ public class HxmBiodataAdapterImpl implements BiodataAdapter
 	private BluetoothAdapter bluetoothAdapter;
 	private BluetoothSocket bluetoothSocket;
 	private BluetoothDevice bluetoothDevice;
+	private BioData bioData = null;
 
 	public BioDataThread() throws Exception
 	{
 	    bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 	    reconnect();
+	}
+
+	private synchronized void setBioData(BioData bioData)
+	{
+	    this.bioData = bioData;
+	}
+
+	public synchronized BioData getBioData()
+	{
+	    return bioData;
 	}
 
 	private void reconnect() throws Exception
@@ -120,8 +131,17 @@ public class HxmBiodataAdapterImpl implements BiodataAdapter
 			while (!isInterrupted())
 			{
 			    HxmPaket paket = hr.read();
-			    paket.validate();
-			    logger.info(paket.toString());
+			    if (paket.validate())
+			    {
+				BioData bd = new BioData();
+				bd.setHeartRate(paket.getHeartBeat());
+				bd.setCadence(paket.getCadence());
+				bd.setBatteryPercent(paket.getBattery());
+				bd.setDistance(paket.getDistance());
+				bd.setSpeed(paket.getSpeed());
+				bd.setStrides(paket.getStrides());
+				setBioData(bd);
+			    }
 			}
 		    }
 		    catch (IOException ex)
@@ -142,7 +162,7 @@ public class HxmBiodataAdapterImpl implements BiodataAdapter
 			{
 			    reconnect();
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 			    logger.info("error reconnecting");
 			}
@@ -261,34 +281,8 @@ public class HxmBiodataAdapterImpl implements BiodataAdapter
 		sb.append(dataSize);
 		sb.append(", ");
 
-		sb.append("heartbeat: ");
+		sb.append("heartrate: ");
 		sb.append(getHeartBeat());
-		sb.append(", ");
-
-		sb.append("beatnumber: ");
-		sb.append(getBeat());
-		sb.append(", ");
-
-		sb.append("battery: ");
-		sb.append(getBattery());
-		sb.append("\n");
-
-
-		sb.append("strides: ");
-		sb.append(getStrides());
-		sb.append(", ");
-
-		sb.append("speed: ");
-		sb.append(getSpeed());
-		sb.append(", ");
-
-		sb.append("distance: ");
-		sb.append(getDistance());
-		sb.append(", ");
-
-		sb.append("cadence: ");
-		sb.append(getCadence());
-		sb.append("\n");
 
 		return sb.toString();
 	    }
@@ -428,7 +422,7 @@ public class HxmBiodataAdapterImpl implements BiodataAdapter
     public BioData getBioData() throws BiodataAdapterException
     {
 	logger.info("calling getBioData");
-	return null;
+	return bioDataThread.getBioData();
     }
 
     @Override

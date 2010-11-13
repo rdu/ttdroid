@@ -42,10 +42,10 @@ public class SimulatedBiodataAdapter implements BiodataAdapter
 	    bd.setBatteryPercent(100);
 	    bd.setBeatNumber(0);
 	    bd.setTimestamp(new Date());
-	    bd.setCadence(0);
-	    bd.setDistance(0);
+	    bd.setCadence(0d);
+	    bd.setDistance(0d);
 	    bd.setHeartRate(0);
-	    bd.setSpeed(0);
+	    bd.setSpeed(0d);
 	    bd.setStrides(0);
 	    setBioData(bd);
 	}
@@ -56,7 +56,7 @@ public class SimulatedBiodataAdapter implements BiodataAdapter
 	    try
 	    {
 		int beat = 0;
-		int distance = 0;
+		Double distance = 0d;
 		int steps = 0;
 		while (true)
 		{
@@ -65,7 +65,7 @@ public class SimulatedBiodataAdapter implements BiodataAdapter
 		    lbioData.setTimestamp(new Date());
 		    lbioData.setBatteryPercent(100);
 		    lbioData.setBeatNumber(beat);
-		    int cadence = (new Double(Math.random() * 100)).intValue();
+		    Double cadence = (new Double(Math.random() * 100));
 		    lbioData.setCadence(cadence);
 		    lbioData.setStrides(steps++);
 		    
