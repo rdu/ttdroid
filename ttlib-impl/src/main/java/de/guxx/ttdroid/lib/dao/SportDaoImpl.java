@@ -16,12 +16,13 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib.dao;
 
 import de.guxx.ttdroid.lib.entity.Sport;
 import de.guxx.ttdroid.lib.util.Settings;
 import de.guxx.ttdroid.lib.util.TTXml;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.Element;
@@ -44,18 +45,18 @@ public class SportDaoImpl extends GenericTTXMLDaoImpl<Sport> implements SportDao
     @Override
     public List<Sport> list()
     {
-        String session = Settings.getSession();
-        TTXml result = TTXml.getInstance(session);
-        Document dom = result.getDomDocument("sports/list");
-	
+	String session = Settings.getSession();
+	TTXml result = TTXml.getInstance(session);
+	Document dom = result.getDomDocument("sports/list");
+
 	NodeList nl = dom.getElementsByTagName("value");
-		
+
 	List<Sport> ll = new ArrayList<Sport>();
 	for (int n = 0; n < nl.getLength(); n++)
 	{
 	    Sport s = new Sport();
 	    Element e = (Element) nl.item(n);
-	    s.setId(getInteger(e,"id"));
+	    s.setId(getInteger(e, "id"));
 	    s.setName(getString(e, "name"));
 	    s.setIconId(getInteger(e, "icon-id"));
 	    s.setIconImage16x16(getString(e, "icon-image-16x16"));
@@ -63,9 +64,25 @@ public class SportDaoImpl extends GenericTTXMLDaoImpl<Sport> implements SportDao
 	    s.setIconImage64x64(getString(e, "icon-image-64x64"));
 	    s.setDescription(getString(e, "comment"));
 	    s.setLastChange(getDate(e, "lastchange"));
-	    ll.add(s);	    
+	    ll.add(s);
 	}
-	
+	putToCacheObj(ll);
 	return ll;
+    }
+
+    protected void putToCacheObj(Object obj)
+    {
+	FileOutputStream fos = null;
+	try
+	{
+	    fos = new FileOutputStream("/tmp/out.dat");
+	    ObjectOutputStream o = new ObjectOutputStream(fos);
+	    o.writeObject(obj);
+	    fos.close();
+	}
+	catch (Exception e)
+	{
+	    e.printStackTrace();
+	}
     }
 }

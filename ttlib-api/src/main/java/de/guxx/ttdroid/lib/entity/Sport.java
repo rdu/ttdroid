@@ -18,15 +18,16 @@
  */
 package de.guxx.ttdroid.lib.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author rdu
  */
-public class Sport
+public class Sport implements Serializable
 {
-
+    public String test;
     private Integer id;
     private String name;
     private Integer iconId;
