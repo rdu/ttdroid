@@ -19,6 +19,9 @@
 package de.guxx.ttdroid.lib.dao;
 
 import de.guxx.ttdroid.lib.exception.ElementNotFoundException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -28,26 +31,27 @@ import org.w3c.dom.NodeList;
  */
 public abstract class GenericTTXMLDaoImpl<T> implements TTDao<T>
 {
+
     @Override
     public T get()
     {
-        if (isCached())
-        {
-            return getCached();
-        }
-        T object = read();
-        putToCache(object);
-        return object;
+	if (isCached())
+	{
+	    return getCached();
+	}
+	T object = read();
+	putToCache(object);
+	return object;
     }
 
     protected boolean isCached()
     {
-        return false;
+	return false;
     }
 
     protected T getCached()
     {
-        return null;
+	return null;
     }
 
     protected void putToCache(T object)
@@ -63,15 +67,15 @@ public abstract class GenericTTXMLDaoImpl<T> implements TTDao<T>
      */
     protected final Element getFirstElement(Element element, String name) throws ElementNotFoundException
     {
-        NodeList nl = element.getElementsByTagName(name);
-        if (nl != null)
-        {
-            if (nl.getLength() > 0)
-            {
-                return (Element) nl.item(0);
-            }
-        }
-        throw new ElementNotFoundException("element " + name + " not found");
+	NodeList nl = element.getElementsByTagName(name);
+	if (nl != null)
+	{
+	    if (nl.getLength() > 0)
+	    {
+		return (Element) nl.item(0);
+	    }
+	}
+	throw new ElementNotFoundException("element " + name + " not found");
     }
 
     /**
@@ -82,14 +86,52 @@ public abstract class GenericTTXMLDaoImpl<T> implements TTDao<T>
      */
     public String getString(Element element, String name)
     {
-        try
-        {
-            Element e = getFirstElement(element, name);
-            return e.getTextContent();
-        } catch (ElementNotFoundException ex)
-        {
-            return "";
-        }
+	try
+	{
+	    Element e = getFirstElement(element, name);
+	    return e.getTextContent();
+	}
+	catch (ElementNotFoundException ex)
+	{
+	    return "";
+	}
+    }
+
+    /**
+     * 
+     * @param e
+     * @param string
+     * @return
+     */
+    protected Date getDate(Element e, String string)
+    {
+	try
+	{
+	    DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    return (Date) formatter.parse(getString(e, string));
+	}
+	catch (Exception ex)
+	{
+	    return null;
+	}
+    }
+
+    /**
+     * helper method to get the integer content of an element by name
+     * 
+     * @param name
+     * @return
+     */
+    public Integer getInteger(Element e, String string)
+    {
+	try
+	{
+	    return Integer.parseInt(getString(e, string));
+	}
+	catch (Exception ex)
+	{
+	    return null;
+	}
     }
 
     /**
@@ -100,19 +142,21 @@ public abstract class GenericTTXMLDaoImpl<T> implements TTDao<T>
      */
     public Double getDouble(Element document, String name)
     {
-        try
-        {
-            try
-            {
-                Element e = getFirstElement(document, name);
-                return Double.parseDouble(e.getTextContent());
-            } catch (Exception e)
-            {
-            }
-        } catch (ElementNotFoundException ex)
-        {
-        }
-        return 0d;
+	try
+	{
+	    try
+	    {
+		Element e = getFirstElement(document, name);
+		return Double.parseDouble(e.getTextContent());
+	    }
+	    catch (Exception e)
+	    {
+	    }
+	}
+	catch (ElementNotFoundException ex)
+	{
+	}
+	return 0d;
     }
 
     protected abstract T read();

@@ -16,7 +16,6 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.guxx.ttdroid.lib.entity;
 
 import java.util.Date;
@@ -28,6 +27,7 @@ import java.util.Date;
 public class Sport
 {
 
+    private Integer id;
     private String name;
     private Integer iconId;
     private String iconImage16x16;
@@ -35,6 +35,16 @@ public class Sport
     private String iconImage64x64;
     private String description;
     private Date lastChange;
+
+    public Integer getId()
+    {
+	return id;
+    }
+
+    public void setId(Integer id)
+    {
+	this.id = id;
+    }
 
     public String getDescription()
     {

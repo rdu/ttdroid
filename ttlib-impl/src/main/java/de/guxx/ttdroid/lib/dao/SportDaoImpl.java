@@ -55,11 +55,17 @@ public class SportDaoImpl extends GenericTTXMLDaoImpl<Sport> implements SportDao
 	{
 	    Sport s = new Sport();
 	    Element e = (Element) nl.item(n);
+	    s.setId(getInteger(e,"id"));
 	    s.setName(getString(e, "name"));
+	    s.setIconId(getInteger(e, "icon-id"));
+	    s.setIconImage16x16(getString(e, "icon-image-16x16"));
+	    s.setIconImage32x32(getString(e, "icon-image-32x32"));
+	    s.setIconImage64x64(getString(e, "icon-image-64x64"));
+	    s.setDescription(getString(e, "comment"));
+	    s.setLastChange(getDate(e, "lastchange"));
 	    ll.add(s);	    
 	}
 	
 	return ll;
     }
-
 }
