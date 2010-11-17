@@ -42,7 +42,7 @@ public class Settings
     
     public static String getCacheDir()
     {
-	return "/tmp";
-//	return "/sdcard/ttdroid/cache";
+//	return "/tmp";
+	return "/sdcard/ttdroid/cache";
     }
 }

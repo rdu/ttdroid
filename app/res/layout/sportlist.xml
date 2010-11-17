@@ -20,24 +20,9 @@
 
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-    <TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="Hello World, ttdoidAppActivity"
-    />
-    
-    <Button
-	android:id="@+id/sportListButton"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:text="Sportliste"
-	android:layout_x="120px"
-	android:layout_y="195px"
-    />
-</LinearLayout>
-
+    android:padding="10dp"
+    android:textSize="16sp" >
+</TextView>

@@ -141,7 +141,7 @@ public class TTXml
     {
         try
         {
-            if (command.isEmpty())
+            if (command.equals(""))
             {
                 return new URL(baseUrl);
             }

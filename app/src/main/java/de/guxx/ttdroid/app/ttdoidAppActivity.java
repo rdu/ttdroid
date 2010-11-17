@@ -20,7 +20,14 @@ package de.guxx.ttdroid.app;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import de.guxx.ttdroid.lib.BioData;
 import de.guxx.ttdroid.lib.BiodataAdapter;
 import de.guxx.ttdroid.lib.Database;
@@ -37,7 +44,7 @@ import java.util.logging.Logger;
  *
  * @author Ronny Dudeck
  */
-public class ttdoidAppActivity extends Activity
+public class ttdoidAppActivity extends Activity implements View.OnClickListener
 {
 
     protected static final Logger logger = Logger.getLogger(ttdoidAppActivity.class.getName());
@@ -54,10 +61,14 @@ public class ttdoidAppActivity extends Activity
     {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.main);
-	biodataAdapter = new HxmBiodataAdapterImpl();
+	
+	Button button = (Button)findViewById(R.id.sportListButton);
+	button.setOnClickListener(this);
+	
+//	biodataAdapter = new HxmBiodataAdapterImpl();
 	try
-	{
-	    writerThread = new DataWriterThread(biodataAdapter);
+	{	    
+//	    writerThread = new DataWriterThread(biodataAdapter);
 	}
 	catch (Exception e)
 	{
@@ -69,8 +80,8 @@ public class ttdoidAppActivity extends Activity
     {
 	try
 	{
-	    biodataAdapter.init();
-	    writerThread.start();
+//	    biodataAdapter.init();
+//	    writerThread.start();
 	}
 	catch (Exception ex)
 	{
@@ -84,8 +95,8 @@ public class ttdoidAppActivity extends Activity
     {
 	try
 	{
-	    biodataAdapter.dispose();
-	    writerThread.interrupt();
+//	    biodataAdapter.dispose();
+//	    writerThread.interrupt();
 	    Database.getInstance().dispose();
 	}
 	catch (Exception ex)
@@ -93,6 +104,13 @@ public class ttdoidAppActivity extends Activity
 	    Logger.getLogger(ttdoidAppActivity.class.getName()).log(Level.SEVERE, null, ex);
 	}
 	super.onPause();
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+	Intent sportActivity = new Intent(this, SportListActivity.class); 
+	startActivity(sportActivity);
     }
 
     private class DataWriterThread extends Thread
