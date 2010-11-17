@@ -34,4 +34,15 @@ public class Settings
     {
 	return System.getenv("TTSESSION");
     }
+    
+    public static Integer getCacheTTL()
+    {
+	return 100;
+    }
+    
+    public static String getCacheDir()
+    {
+	return "/tmp";
+//	return "/sdcard/ttdroid/cache";
+    }
 }
