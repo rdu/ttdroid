@@ -19,15 +19,12 @@
 package de.guxx.ttdroid.lib.dao;
 
 import de.guxx.ttdroid.lib.exception.ElementNotFoundException;
-import java.beans.XMLEncoder;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -107,7 +104,8 @@ public abstract class GenericTTXMLDaoImpl<T> implements TTDao<T>
 	try
 	{
 	    Element e = getFirstElement(element, name);
-	    return e.getTextContent();
+	    String result = StringEscapeUtils.unescapeHtml(e.getTextContent()) ;
+	    return result;
 	}
 	catch (ElementNotFoundException ex)
 	{
