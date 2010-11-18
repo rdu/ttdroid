@@ -32,8 +32,7 @@ public class Settings
      */
     public static String getSession()
     {
-	return "9v0d1CQJLlUYyYKDsrwYK6PIu1iYWm06QL95kg0E";
-	//return System.getenv("TTSESSION");
+	return System.getenv("TTSESSION");
     }
     
     public static Integer getCacheTTL()
