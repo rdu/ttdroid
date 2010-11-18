@@ -19,7 +19,14 @@
 package de.guxx.ttdroid.app;
 
 import android.app.ListActivity;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ImageSpan;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -30,7 +37,8 @@ import android.widget.Toast;
 import de.guxx.ttdroid.lib.dao.SportDao;
 import de.guxx.ttdroid.lib.dao.SportDaoImpl;
 import de.guxx.ttdroid.lib.entity.Sport;
-import java.util.ArrayList;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -50,22 +58,31 @@ public class SportListActivity extends ListActivity
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+	setTheme(R.style.ListStyle);
 	super.onCreate(savedInstanceState);
 
 	SportDao sd = new SportDaoImpl();
 
 	List<Sport> sl = sd.list();
-	
-	String[] sa = new String[sl.size()];
+
+	Spanned[] sa = new Spanned[sl.size()];
 
 	int pos = 0;
-	
+
 	for (Sport s : sl)
 	{
-	    sa[pos++] = s.getName();
+	    SpannableStringBuilder builder = new SpannableStringBuilder();
+	    builder.append(s.getName());
+	    int lengthOfPart1 = builder.length();
+	    builder.append(" ");
+	    Drawable d = loadImageFromWebOperations("http://trainingstagebuch.org/static" + s.getIconImage32x32());
+	    d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight()); // <---- Very important otherwise your image won't appear
+	    ImageSpan myImage = new ImageSpan(d);
+	    builder.setSpan(myImage, lengthOfPart1, lengthOfPart1 + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+	    sa[pos++] = builder; //Html.fromHtml("<img src=\"http://trainingstagebuch.org/static/images/sports/16x16/cycling_road.png\" />" + s.getName() + "");
 	}
 
-	setListAdapter(new ArrayAdapter<String>(this, R.layout.sportlist, sa));
+	setListAdapter(new ArrayAdapter<Spanned>(this, R.layout.sportlist, sa));
 
 	ListView lv = getListView();
 	lv.setTextFilterEnabled(true);
@@ -81,5 +98,19 @@ public class SportListActivity extends ListActivity
 			Toast.LENGTH_SHORT).show();
 	    }
 	});
+    }
+
+    private Drawable loadImageFromWebOperations(String url)
+    {
+	try
+	{
+	    InputStream is = (InputStream) new URL(url).getContent();
+	    Drawable d = Drawable.createFromStream(is, "src name");
+	    return d;
+	}
+	catch (Exception e)
+	{
+	    return null;
+	}
     }
 }
