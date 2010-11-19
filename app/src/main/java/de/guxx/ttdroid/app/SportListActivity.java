@@ -72,13 +72,14 @@ public class SportListActivity extends ListActivity
 	for (Sport s : sl)
 	{
 	    SpannableStringBuilder builder = new SpannableStringBuilder();
-	    builder.append(s.getName());
 	    int lengthOfPart1 = builder.length();
 	    builder.append(" ");
 	    Drawable d = loadImageFromWebOperations("http://trainingstagebuch.org/static" + s.getIconImage32x32());
 	    d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight()); // <---- Very important otherwise your image won't appear
 	    ImageSpan myImage = new ImageSpan(d);
 	    builder.setSpan(myImage, lengthOfPart1, lengthOfPart1 + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+	    builder.append(" ");
+	    builder.append(s.getName());
 	    sa[pos++] = builder; //Html.fromHtml("<img src=\"http://trainingstagebuch.org/static/images/sports/16x16/cycling_road.png\" />" + s.getName() + "");
 	}
 
