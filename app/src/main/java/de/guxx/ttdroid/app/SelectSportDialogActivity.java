@@ -19,41 +19,32 @@
 package de.guxx.ttdroid.app;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.style.ImageSpan;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import de.guxx.ttdroid.app.adapter.TTListAdapter;
+import de.guxx.ttdroid.app.adapter.TTListAdapter.DataContainer;
 import de.guxx.ttdroid.lib.dao.SportDao;
 import de.guxx.ttdroid.lib.dao.SportDaoImpl;
 import de.guxx.ttdroid.lib.entity.Sport;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author rdu
  */
-public class SportListActivity extends ListActivity
+public class SelectSportDialogActivity extends ListActivity
 {
-
-    static final String[] COUNTRIES = new String[]
-    {
-	"Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra",
-	"Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina",
-	"Armenia", "Aruba", "Australia", "Austria", "Azerbaijan"
-    };
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -62,12 +53,8 @@ public class SportListActivity extends ListActivity
 	super.onCreate(savedInstanceState);
 
 	SportDao sd = new SportDaoImpl();
-
 	List<Sport> sl = sd.list();
-
-	Spanned[] sa = new Spanned[sl.size()];
-
-	int pos = 0;
+	List<DataContainer> dcl = new ArrayList<DataContainer>();
 
 	for (Sport s : sl)
 	{
@@ -75,15 +62,18 @@ public class SportListActivity extends ListActivity
 	    int lengthOfPart1 = builder.length();
 	    builder.append(" ");
 	    Drawable d = loadImageFromWebOperations("http://trainingstagebuch.org/static" + s.getIconImage32x32());
-	    d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight()); // <---- Very important otherwise your image won't appear
+	    d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
 	    ImageSpan myImage = new ImageSpan(d);
 	    builder.setSpan(myImage, lengthOfPart1, lengthOfPart1 + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 	    builder.append(" ");
 	    builder.append(s.getName());
-	    sa[pos++] = builder; //Html.fromHtml("<img src=\"http://trainingstagebuch.org/static/images/sports/16x16/cycling_road.png\" />" + s.getName() + "");
+	    DataContainer dc = new DataContainer();
+	    dc.setId(s.getId());
+	    dc.setContent(builder);
+	    dcl.add(dc);
 	}
 
-	setListAdapter(new ArrayAdapter<Spanned>(this, R.layout.sportlist, sa));
+	setListAdapter(new TTListAdapter(dcl, R.layout.sportlist));
 
 	ListView lv = getListView();
 	lv.setTextFilterEnabled(true);
@@ -95,8 +85,10 @@ public class SportListActivity extends ListActivity
 	    public void onItemClick(AdapterView<?> parent, View view,
 		    int position, long id)
 	    {
-		Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
-			Toast.LENGTH_SHORT).show();
+		Bundle map = new Bundle();
+		map.putLong("id", id);
+		setResult(RESULT_OK, new Intent().putExtras(map));
+		finish();
 	    }
 	});
     }

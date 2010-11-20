@@ -16,33 +16,23 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package de.guxx.ttdroid.lib.util;
+
+package de.guxx.ttdroid.app;
+
+import android.app.Activity;
+import android.os.Bundle;
 
 /**
  *
  * @author rdu
  */
-public class Settings
+public class NewExerciseActivity extends Activity
 {
 
-    /**
-     * static method to get the current session
-     * TODO: correct implementation
-     * @return
-     */
-    public static String getSession()
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
     {
-	return System.getenv("TTSESSION");
-    }
-    
-    public static Integer getCacheTTL()
-    {
-	return 100;
-    }
-    
-    public static String getCacheDir()
-    {
-//	return "/tmp";
-	return "/sdcard/ttdroid/cache";
-    }
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.newexercise);
+    }    
 }

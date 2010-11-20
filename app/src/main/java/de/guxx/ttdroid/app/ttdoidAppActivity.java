@@ -20,18 +20,12 @@ package de.guxx.ttdroid.app;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import de.guxx.ttdroid.lib.BioData;
 import de.guxx.ttdroid.lib.BiodataAdapter;
-import de.guxx.ttdroid.lib.Database;
-import de.guxx.ttdroid.lib.HxmBiodataAdapterImpl;
 import de.guxx.ttdroid.lib.dao.SnapshotDao;
 import de.guxx.ttdroid.lib.dao.SnapshotDaoImpl;
 import de.guxx.ttdroid.lib.entity.Snapshot;
@@ -48,6 +42,8 @@ public class ttdoidAppActivity extends Activity implements View.OnClickListener
 {
 
     protected static final Logger logger = Logger.getLogger(ttdoidAppActivity.class.getName());
+    private final int ACTIVITY_NEW_EXERCISE_REQUEST_CODE = 0x01;
+    private final int SPORTLIST_ACTIVITY_REQUEST_CODE = 0x0;
     protected BluetoothAdapter bluetoothAdapter;
     protected BiodataAdapter biodataAdapter;
     private DataWriterThread writerThread;
@@ -61,13 +57,13 @@ public class ttdoidAppActivity extends Activity implements View.OnClickListener
     {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.main);
-	
-	Button button = (Button)findViewById(R.id.sportListButton);
+
+	Button button = (Button) findViewById(R.id.newExerciseButton);
 	button.setOnClickListener(this);
-	
+
 //	biodataAdapter = new HxmBiodataAdapterImpl();
 	try
-	{	    
+	{
 //	    writerThread = new DataWriterThread(biodataAdapter);
 	}
 	catch (Exception e)
@@ -85,7 +81,6 @@ public class ttdoidAppActivity extends Activity implements View.OnClickListener
 	}
 	catch (Exception ex)
 	{
-	    Logger.getLogger(ttdoidAppActivity.class.getName()).log(Level.SEVERE, null, ex);
 	}
 	super.onResume();
     }
@@ -97,11 +92,10 @@ public class ttdoidAppActivity extends Activity implements View.OnClickListener
 	{
 //	    biodataAdapter.dispose();
 //	    writerThread.interrupt();
-	    Database.getInstance().dispose();
+//	    Database.getInstance().dispose();
 	}
 	catch (Exception ex)
 	{
-	    Logger.getLogger(ttdoidAppActivity.class.getName()).log(Level.SEVERE, null, ex);
 	}
 	super.onPause();
     }
@@ -109,8 +103,19 @@ public class ttdoidAppActivity extends Activity implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-	Intent sportActivity = new Intent(this, SportListActivity.class); 
-	startActivity(sportActivity);
+	Intent intent = new Intent(this, NewExerciseActivity.class);
+	startActivityForResult(intent, ACTIVITY_NEW_EXERCISE_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent)
+    {
+	if (resultCode == RESULT_OK)
+	{
+	    Bundle extras = intent.getExtras();
+	    logger.info(extras.get("id").toString());
+	}
+	super.onActivityResult(requestCode, resultCode, intent);
     }
 
     private class DataWriterThread extends Thread
