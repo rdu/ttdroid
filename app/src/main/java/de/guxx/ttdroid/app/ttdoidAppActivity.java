@@ -58,9 +58,12 @@ public class ttdoidAppActivity extends Activity implements View.OnClickListener
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.main);
 
-	Button button = (Button) findViewById(R.id.newExerciseButton);
-	button.setOnClickListener(this);
+//	Button button = (Button) findViewById(R.id.newExerciseButton);
+//	button.setOnClickListener(this);
 
+	Intent intent = new Intent(this, NewExerciseActivity.class);
+	startActivityForResult(intent, ACTIVITY_NEW_EXERCISE_REQUEST_CODE);
+	
 //	biodataAdapter = new HxmBiodataAdapterImpl();
 	try
 	{

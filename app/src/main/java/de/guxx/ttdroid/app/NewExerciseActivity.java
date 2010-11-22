@@ -19,20 +19,62 @@
 
 package de.guxx.ttdroid.app;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.BaseAdapter;
+import de.guxx.ttdroid.app.adapter.TTListAdapter;
+import de.guxx.ttdroid.app.adapter.TTListAdapter.DataContainer;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author rdu
  */
-public class NewExerciseActivity extends Activity
+public class NewExerciseActivity extends ListActivity
 {
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+	setTheme(R.style.ListStyle);	
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.newexercise);
+	setListAdapter(new MyAdapter());	
     }    
+
+    private class MyAdapter extends BaseAdapter
+    {
+
+	@Override
+	public int getCount()
+	{
+	    return 1;
+	}
+
+	@Override
+	public Object getItem(int position)
+	{
+	    return "text";
+	}
+
+	@Override
+	public long getItemId(int position)
+	{
+	    return 1;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent)
+	{	    
+	    View v = View.inflate(parent.getContext(), R.layout.listitem, parent);
+	    return v;
+	}
+	
+    }
 }
