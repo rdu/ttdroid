@@ -6,6 +6,8 @@
       android:versionName="1.0">
           
     <uses-permission android:name="android.permission.BLUETOOTH" />          
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />    
     
     <application android:label="@string/app_name">
         <activity android:name="ttdoidAppActivity"
@@ -14,6 +16,12 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="SelectSportDialogActivity"
+                  android:label="@string/app_name">
+        </activity>
+        <activity android:name="NewExerciseActivity"
+                  android:label="@string/app_name">
         </activity>
     </application>
 </manifest> 

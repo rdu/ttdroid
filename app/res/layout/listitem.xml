@@ -20,24 +20,18 @@
 
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-    <TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="Hello World, ttdoidAppActivity"
-    />
-    
-    <Button
-	android:id="@+id/newExerciseButton"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:text="Neue Trainingseinheit anlegen"
-	android:layout_x="120px"
-	android:layout_y="195px"
-    />
-</LinearLayout>
-
+<AbsoluteLayout
+android:id="@+id/widget0"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+xmlns:android="http://schemas.android.com/apk/res/android"
+>
+    <AnalogClock
+android:id="@+id/widget28"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_x="2px"
+android:layout_y="5px"
+>
+    </AnalogClock>
+</AbsoluteLayout>

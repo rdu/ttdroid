@@ -19,12 +19,9 @@
 package de.guxx.ttdroid.lib.dao;
 
 import de.guxx.ttdroid.lib.entity.Sport;
+import de.guxx.ttdroid.lib.util.EntityCache;
 import de.guxx.ttdroid.lib.util.Settings;
 import de.guxx.ttdroid.lib.util.TTXml;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.Element;
@@ -47,8 +44,18 @@ public class SportDaoImpl extends GenericTTXMLDaoImpl<Sport> implements SportDao
     @Override
     public List<Sport> list()
     {
-	return readFromCache();
-	/*
+	String cacheName = this.getClass().getCanonicalName() + "List";
+	try
+	{
+	    if (EntityCache.getInstance().isCached(cacheName))
+	    {
+		return (List<Sport>) EntityCache.getInstance().readFromCache(cacheName);
+	    }
+	}
+	catch (Exception e)
+	{
+	}
+
 	String session = Settings.getSession();
 	TTXml result = TTXml.getInstance(session);
 	Document dom = result.getDomDocument("sports/list");
@@ -70,41 +77,13 @@ public class SportDaoImpl extends GenericTTXMLDaoImpl<Sport> implements SportDao
 	    s.setLastChange(getDate(e, "lastchange"));
 	    ll.add(s);
 	}
-	putToCacheObj(ll);
-	return ll;*/
-    }
-
-    protected void putToCacheObj(Object obj)
-    {
-	FileOutputStream fos = null;
 	try
 	{
-	    fos = new FileOutputStream("/tmp/sportslist.dat");
-	    ObjectOutputStream o = new ObjectOutputStream(fos);
-	    o.writeObject(obj);
-	    fos.close();
+	    EntityCache.getInstance().putToCache(cacheName, ll);
 	}
 	catch (Exception e)
 	{
-	    e.printStackTrace();
 	}
-    }
-
-    protected List<Sport>readFromCache()
-    {
-	FileInputStream fis = null;
-	try
-	{
-	    fis = new FileInputStream("/tmp/sportslist.dat");
-	    ObjectInputStream o = new ObjectInputStream(fis);
-	    List<Sport> l = (List<Sport>)o.readObject();
-	    fis.close();
-	    return l;
-	}
-	catch (Exception e)
-	{
-	    e.printStackTrace();
-	}
-	return null;
+	return ll;
     }
 }

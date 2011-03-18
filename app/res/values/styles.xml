@@ -20,24 +20,13 @@
 
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-    <TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="Hello World, ttdoidAppActivity"
-    />
-    
-    <Button
-	android:id="@+id/newExerciseButton"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:text="Neue Trainingseinheit anlegen"
-	android:layout_x="120px"
-	android:layout_y="195px"
-    />
-</LinearLayout>
-
+<resources>
+    <style name="ListStyle" parent="android:Theme.Light">
+	<item name="android:textAppearance">@style/ListTextAppearance</item>
+    </style>
+    <style name="ListTextAppearance" parent="@android:style/TextAppearance">
+	<item name="android:textSize">13sp</item>
+	<item name="android:textColor">#333</item>
+	<item name="android:textStyle">bold</item>
+    </style>
+</resources>

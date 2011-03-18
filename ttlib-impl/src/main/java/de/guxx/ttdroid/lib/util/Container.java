@@ -16,34 +16,46 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  */
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package de.guxx.ttdroid.lib.util;
+
+import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
  * @author rdu
  */
-public class Settings
+public class Container implements Serializable
 {
 
-    /**
-     * static method to get the current session
-     * TODO: correct implementation
-     * @return
-     */
-    public static String getSession()
+    private Object object;
+    private Date TTL;
+
+    public Container()
     {
-	return "9v0d1CQJLlUYyYKDsrwYK6PIu1iYWm06QL95kg0E";
-//	return System.getenv("TTSESSION");
+	Calendar cal = Calendar.getInstance();
+	cal.add(Calendar.SECOND, Settings.getCacheTTL());
+	TTL = cal.getTime();
     }
-    
-    public static Integer getCacheTTL()
+
+    public void setObject(Object object)
     {
-	return 100;
+	this.object = object;
     }
-    
-    public static String getCacheDir()
+
+    public Object getObject()
     {
-//	return "/tmp";
-	return "/sdcard/ttdroid/cache";
+	return object;
+    }
+
+    public Boolean isValid()
+    {
+	return TTL.after(new Date());
     }
 }

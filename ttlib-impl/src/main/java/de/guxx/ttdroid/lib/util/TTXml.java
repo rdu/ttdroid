@@ -18,7 +18,6 @@
  */
 package de.guxx.ttdroid.lib.util;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -28,9 +27,6 @@ import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
-import org.xml.sax.EntityResolver;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -141,7 +137,7 @@ public class TTXml
     {
         try
         {
-            if (command.isEmpty())
+            if (command.equals(""))
             {
                 return new URL(baseUrl);
             }
