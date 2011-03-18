@@ -19,19 +19,9 @@
     If not, see <http://www.gnu.org/licenses/>.
 
 -->
-
-<AbsoluteLayout
-android:id="@+id/widget0"
-android:layout_width="fill_parent"
-android:layout_height="fill_parent"
-xmlns:android="http://schemas.android.com/apk/res/android"
->
-    <AnalogClock
-android:id="@+id/widget28"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_x="2px"
-android:layout_y="5px"
->
-    </AnalogClock>
-</AbsoluteLayout>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp"
+    android:textSize="16sp" >
+</TextView>
